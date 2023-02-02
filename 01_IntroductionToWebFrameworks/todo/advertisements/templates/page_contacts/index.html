@@ -1,0 +1,13 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+    <p class="h3">Мы находимся по адресу:</p>
+    <a class="h5" href="https://maps.google.com/?q={{ address }}" target="_blank">{{ address }}</a>
+    <div class="dropdown-divider"></div>
+
+    <p class="h3">Наш телефон:</p>
+    <a class="h5" href="tel:{{ phone }}" target="_blank">{{ phone }}</a>
+    <div class="dropdown-divider"></div>
+
+    <p class="h3">Электронная почта:</p>
+    <a class="h5" href="mailto:{{ email }}" target="_blank">{{ email }}</a>
+{% endblock %}

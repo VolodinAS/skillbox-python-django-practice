@@ -1,0 +1,44 @@
+{% extends 'base_template/base_template.html' %}
+{% load i18n %}
+{% load poll_extras %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+        {% if request.user|has_group:"Верифицированные пользователи" or request.user|has_group:"Модераторы" %}
+            {% url 'page_news_add'   as action_news_add %}
+            {% if msg %}
+                {% include 'utls_template/alert.html' with bt_theme="warning" bt_text=msg %}
+            {% endif %}
+            <form action="{{ action_news_add }}" method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="form-group mb-4">
+                    <h4 class="display-6">{% trans "tid_label_header" %}:</h4>
+                    {{ form.header.errors }}
+                    {{ form.header }}
+                </div>
+
+                <div class="form-group mb-4">
+                    <h4 class="display-6">{% trans "tid_label_content" %}:</h4>
+                    {{ form.content.errors }}
+                    {{ form.content }}
+                </div>
+
+                <div class="form-group mb-4">
+                    <h4 class="display-6">{% trans "tid_label_tag" %}:</h4>
+                    {{ form.tag.errors }}
+                    {{ form.tag }}
+                </div>
+
+                <div class="form-group mb-4">
+                    <input class="btn btn-lg btn-primary col" type="submit" name="sub" value="{% trans "tid_buttons_news_add" %}">
+                </div>
+            </form>
+        {% else %}
+            {% trans "tid_messages_system_denied" as message_system_denied %}
+            {% include 'utls_template/alert.html' with bt_theme="warning" bt_text=message_system_denied %}
+        {% endif %}
+    {% else %}
+        {% trans "tid_messages_system_need_auth" as message_system_need_auth %}
+        {% include 'utls_template/alert.html' with bt_theme="warning" bt_text=message_system_need_auth %}
+    {% endif %}
+{% endblock %}

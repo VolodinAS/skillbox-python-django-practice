@@ -1,0 +1,15 @@
+{% extends 'base_template/base_template.html' %}
+{% load static %}
+{% block content %}
+    {% if cart|length %}
+        {% include 'general/good_list.html' with cart=cart %}
+        {% if request.user.is_authenticated %}
+            {% url 'page_basket_confirm'   as link_confirm %}
+            <button class="btn btn-primary btn-lg col" onclick="if ( confirm('Вы действительно хотите подтвердить оформление заказа?') ) { window.location.href='{{ link_confirm }}' }">ПОДТВЕРДИТЬ ЗАКАЗ</button>
+        {% else %}
+            {% include 'utls_template/alert.html' with bt_theme="warning" bt_text="Чтобы продолжить покупки, нужно авторизоваться" %}
+        {% endif %}
+    {% else %}
+        {% include 'utls_template/alert.html' with bt_theme="info" bt_text="Ваша корзина пока пуста" %}
+    {% endif %}
+{% endblock %}

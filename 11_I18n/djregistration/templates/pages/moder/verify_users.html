@@ -1,0 +1,42 @@
+{% extends 'base_template/base_template.html' %}
+{% load i18n %}
+{% load poll_extras %}
+{% block content %}
+    {% url 'user_verify'   as action_verify %}
+    {% if request.user.is_authenticated %}
+        {% if request.user|has_group:"Модераторы" %}
+            {% if unverified_users %}
+                {% for user in unverified_users %}
+                    <div class="row mb-3 mt-3">
+                        <div class="col">
+                            <h4 class="display-6">{{ user.username }}</h4>
+                        </div>
+                        <div class="col">{{ user.groups.all.0 }}</div>
+                        <div class="col-auto">
+                            <form action="{{ action_verify }}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="user_id" value="{{ user.id }}">
+                                {% if user|has_group:"Зарегистрированные пользователи" %}
+                                    <input class="btn btn-primary" type="submit" name="sub" value="{% trans "tid_buttons_moder_users_verify" %}">
+                                {% elif user|has_group:"Верифицированные пользователи" %}
+                                    <input class="btn btn-danger" type="submit" name="sub" value="{% trans "tid_buttons_moder_users_unverify" %}">
+                                {% endif %}
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% trans "tid_messages_moder_user_noone" as message_moder_user_noone %}
+                {% include 'utls_template/alert.html' with bt_theme="info" bt_text=message_moder_user_noone %}
+            {% endif %}
+        {% else %}
+            {% trans "tid_messages_system_denied" as message_system_denied %}
+            {% include 'utls_template/alert.html' with bt_theme="danger" bt_text=message_system_denied %}
+        {% endif %}
+    {% else %}
+        {% trans "tid_messages_system_need_auth" as message_system_need_auth %}
+        {% include 'utls_template/alert.html' with bt_theme="danger" bt_text=message_system_need_auth %}
+    {% endif %}
+
+
+{% endblock %}

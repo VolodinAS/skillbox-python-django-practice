@@ -1,0 +1,39 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+    {% url 'news_add'   as action_news_add %}
+    <form action="{{ action_news_add }}" method="post">
+        {{ add_news_form.non_field_errors }}
+        {% csrf_token %}
+        <div class="form-group">
+            <label class="font-weight-bold" for="{{ add_news_form.header.id_for_label }}">Заголовок новости:</label>
+            {{ add_news_form.header }}
+        </div>
+
+        <div class="form-group">
+            <label class="font-weight-bold" for="{{ add_news_form.content.id_for_label }}">Содержимое новости:</label>
+            {{ add_news_form.content }}
+        </div>
+
+        <div class="form-group">
+            <label class="font-weight-bold" for="id_user">Автор:</label>
+{#            {{ select_user }}#}
+            <select name="user" id="id_user">
+                <option>Выберите</option>
+                {% for user in select_user %}
+
+                    <option value="{{ user.id }}">{{ user.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-check">
+            {{ add_news_form.activity }}
+            <label class="form-check-label" for="{{ add_news_form.activity.id_for_label }}">
+                Флаг активности
+            </label>
+        </div>
+
+        <hr>
+        <button class="btn btn-primary col" type="submit">Добавить новость</button>
+    </form>
+{% endblock %}

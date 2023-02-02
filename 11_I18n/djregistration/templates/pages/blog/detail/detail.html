@@ -1,0 +1,44 @@
+{% extends 'base_template/base_template.html' %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+    {% if blog_item %}
+        <div class="row">
+            <div class="col-auto text-center">
+                {% include 'utls_template/avatar.html' with item_element=blog_item %}
+            </div>
+            <div class="col">
+                <h4 class="display-4">
+                    «{{ blog_item.header }}»
+                </h4>
+                <div class="text-muted">
+                    <b>{% trans "tid_blog_label_created_at" %}:</b> {{ blog_item.create_at|date:"d.m.Y H:i:s" }}<br>
+                    <b>{% trans "tid_blog_label_updated_at" %}:</b> {{ blog_item.updated_at|date:"d.m.Y H:i:s" }}
+                </div>
+            </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="row">
+            <div class="col">
+                {% if blog_item.blog_photos.all|length %}
+                    {% for image in blog_item.blog_photos.all %}
+                        <div class="d-inline">
+                            <img class="blog-image" src="{% get_media_prefix %}{{ image.image }}" alt="image #{{ image.id }} of blog #{{ blog_item.id }} by {{ blog_item.user.username }}" height="250">
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% trans "tid_messages_blog_no_images" as message_blog_no_images %}
+                    {% include 'utls_template/alert.html' with bt_theme="info" bt_text=message_blog_no_images %}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {{ blog_item.content|linebreaksbr }}
+            </div>
+        </div>
+    {% else %}
+        {% trans "tid_messages_blog_no_exists" as message_blog_no_exists %}
+        {% include 'utls_template/alert.html' with bt_theme="warning" bt_text=message_blog_no_exists %}
+    {% endif %}
+{% endblock %}

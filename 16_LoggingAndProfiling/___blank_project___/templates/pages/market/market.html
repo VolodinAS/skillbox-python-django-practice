@@ -1,0 +1,15 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+    {% if goods_list %}
+        <div class="good-container">
+            {% for good in goods_list %}
+                {% if good.remains > 0 %}
+                    {% include 'pages/market/good_item.html' %}
+                {% endif %}
+
+            {% endfor %}
+        </div>
+    {% else %}
+        {% include 'utls_template/alert.html' with bt_theme="warning" bt_text="Пока еще товаров нет" %}
+    {% endif %}
+{% endblock %}

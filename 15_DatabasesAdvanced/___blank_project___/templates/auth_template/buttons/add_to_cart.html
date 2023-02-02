@@ -1,0 +1,29 @@
+{% url "page_market_item" good_item.id as action_add_cart %}
+<form action="{{ action_add_cart }}" method="post">
+
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {{ form.update }}
+    <h4 class="display-6">Количество:</h4>
+    <div class="row">
+
+        <div class="col">
+            <div class="form-group">
+
+                {{ form.quantity.errors }}
+                {{ form.quantity }}
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group mb-4">
+                <input class="btn btn-primary" type="submit" value="Добавить в корзину">
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+</form>

@@ -1,0 +1,145 @@
+{% extends 'base_template/base_template.html' %}
+{% load poll_extras %}
+{% load static %}
+{% block content %}
+    {% if user_data %}
+        <div class="row">
+            <div class="col text-center">
+                {% include 'utls_template/avatar.html' with user_data=user_data %}
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-3">
+                <h5 class="display-6">Пользователь:</h5>
+            </div>
+            <div class="col">{{ user_data.username }}</div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-3">
+                <h5 class="display-6">Имя:</h5>
+            </div>
+            <div class="col">{{ user_data.first_name|capfirst }} {{ user_data.last_name|capfirst }}</div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-3">
+                <h5 class="display-6">Дата рождения:</h5>
+            </div>
+            <div class="col">{{ user_data.profile.birthday|date:"d.m.Y" }}</div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-3">
+                <h5 class="display-6">Город проживания:</h5>
+            </div>
+            <div class="col">{{ user_data.profile.city }}</div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-3">
+                <h5 class="display-6">Телефон:</h5>
+            </div>
+            <div class="col">{{ user_data.profile.phone }}</div>
+        </div>
+    {% else %}
+        {% if request.user.is_authenticated %}
+
+            {% if msg %}
+                {% include 'utls_template/alert.html' with bt_theme=msg_theme bt_text=msg %}
+            {% endif %}
+
+            <div class="card" style="width: 25rem;">
+                <img class="card-img-top user-avatar" src="{% get_media_prefix %}{{ request.user.profile.avatar_file }}" width="100" alt="avatar of {{ request.user.username }}">
+                <div class="card-body">
+                    <h5 class="card-title">Информация о покупателе</h5>
+                    <p class="card-text">
+                    </p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <b>Покупок:</b> {{ orders_count }}
+                        </li>
+                        <li class="list-group-item">
+                            <b>Сумма покупок:</b> ${{ orders_summ|floatformat:2 }}
+                        </li>
+                        <li class="list-group-item">
+                            <b>Статус:</b> {{ user_status }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            {% include 'utls_template/alert.html' with bt_theme="warning" bt_text=balance_format|safe %}
+            <hr>
+            {% url 'user_profile'   as action_save_profile %}
+            <form action="{{ action_save_profile }}" method="post" enctype="multipart/form-data">
+                {{ form.non_field_errors }}
+                {% csrf_token %}
+                <div class="form-group mb-4">
+                    <h4 class="display-6">Имя:</h4>
+                    {{ form.first_name.errors }}
+                    {{ form.first_name }}
+                </div>
+
+                <div class="form-group mb-4">
+                    <h4 class="display-6">Фамилия:</h4>
+                    {{ form.last_name.errors }}
+                    {{ form.last_name }}
+                </div>
+
+                <div class="form-group mb-4">
+                    <h4 class="display-6">Дата рождения:</h4>
+                    {{ form.birthday.errors }}
+                    {{ form.birthday }}
+                </div>
+
+                <div class="form-group mb-4">
+                    <h4 class="display-6">Город проживания:</h4>
+                    {{ form.city.errors }}
+                    {{ form.city }}
+                </div>
+
+                <div class="form-group mb-4">
+                    <h4 class="display-6">Телефон:</h4>
+                    {{ form.phone.errors }}
+                    {{ form.phone }}
+                </div>
+
+                <div class="form-group mb-4">
+                    <div class="row">
+                        <div class="col-auto text-center">
+                            {% if request.user.profile %}
+                                {% if request.user.profile.avatar_file %}
+                                    <img class="user-avatar" src="{% get_media_prefix %}{{ request.user.profile.avatar_file }}" width="100" alt="avatar of {{ request.user.username }}">
+                                {% else %}
+                                    <img src="{% static 'images/system/no_avatar.png' %}" width="100" alt="no avatar">
+                                {% endif %}
+                            {% else %}
+                                <img src="{% static 'images/system/no_avatar.png' %}" width="100" alt="no avatar">
+                            {% endif %}
+                        </div>
+                        <div class="col">
+                            <h4 class="display-6">Аватарка:</h4>
+                            {{ form.avatar_file.errors }}
+                            <div class="custom-file">
+                                {{ form.avatar_file }}
+                                <label class="custom-file-label" for="id_avatar_file">Выбрать файл</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group mb-4">
+                    <input class="btn btn-lg btn-primary col" type="submit" name="sub" value="Обновить данные">
+                </div>
+
+            </form>
+        {% else %}
+            {% include 'utls_template/alert.html' with bt_theme="warning" bt_text="У Вас нет доступа к данному разделу!" %}
+        {% endif %}
+    {% endif %}
+
+
+{% endblock %}

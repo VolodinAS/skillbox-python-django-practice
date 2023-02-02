@@ -1,0 +1,48 @@
+{% load poll_extras %}
+
+{#{% if request.user.is_authenticated %}#}
+{#    {% if request.user|has_group:"Модераторы" %}#}
+{#        <li class="nav-item dropdown">#}
+{#            <a class="nav-link dropdown-toggle" href="#" id="moder-nav-bar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                Модерация ({{ total_moders }})#}
+{#            </a>#}
+{#            <div class="dropdown-menu" aria-labelledby="moder-nav-bar">#}
+{#                {% url 'user_verify'   as link_user_verify %}#}
+{#                <a class="dropdown-item" href="{{ link_user_verify }}">Верификация польз. ({{ users_unverified }})</a>#}
+{#                {% url 'page_news_moder'   as link_news_moder %}#}
+{#                <a class="dropdown-item" href="{{ link_news_moder }}">Модерация новостей ({{ unmoder_news }})</a>#}
+{#            </div>#}
+{#        </li>#}
+{#    {% endif %}#}
+{#{% endif %}#}
+
+<li class="nav-item dropdown">
+    {% if request.user.is_authenticated %}
+        <a class="nav-link dropdown-toggle" href="#" id="profile-nav-bar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <b>{{ request.user.username }}</b>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="profile-nav-bar">
+            {% url 'auth_logout'   as link_logout %}
+            {% url 'user_profile'   as link_profile %}
+            {% url 'page_my_blog'   as link_my_blog %}
+            <a class="dropdown-item" href="{{ link_profile }}">Мой профиль</a>
+            {% if request.user|has_group:"Модераторы" or request.user|has_group:"Верифицированные пользователи" %}
+                {% url 'page_my_news'   as link_my_news %}
+                <a class="dropdown-item" href="{{ link_my_news }}">Мои новости</a>
+            {% endif %}
+            <a class="dropdown-item" href="{{ link_my_blog }}">Мой блог</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{ link_logout }}">Выход</a>
+        </div>
+    {% else %}
+        <a class="nav-link dropdown-toggle" href="#" id="auth-nav-bar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Аутентификация
+        </a>
+        {% url 'auth_login'   as link_login %}
+        {% url 'auth_reg'   as link_reg %}
+        <div class="dropdown-menu" aria-labelledby="auth-nav-bar">
+            <a class="dropdown-item" href="{{ link_login }}">Войти</a>
+            <a class="dropdown-item" href="{{ link_reg }}">Зарегистрироваться</a>
+        </div>
+    {% endif %}
+</li>

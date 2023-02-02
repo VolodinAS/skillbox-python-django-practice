@@ -1,0 +1,32 @@
+{% extends 'base_template/base_template.html' %}
+{% load static %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+        {% include 'auth_template/buttons/blog_buttons.html' %}
+    {% else %}
+        {% include 'utls_template/alert.html' with bt_theme="warning" bt_text="Чтобы добавить блог, нужно авторизоваться" %}
+    {% endif %}
+    {% if blog_list %}
+        {% for blog_item in blog_list %}
+            <b>Название:</b> {{ blog_item.header }}<br><br>
+            <b>Содержимое:</b> {{ blog_item.content }}<br><br>
+            <b>Изображения ({{ blog_item.blog_photos.all|length }}):</b>
+            <div class="row">
+                {% if blog_item.blog_photos.all|length %}
+                    {% for image in blog_item.blog_photos.all %}
+                        <div class="d-inline">
+                            <img class="blog-image" src="{% get_media_prefix %}{{ image.image }}" alt="image #{{ image.id }} of blog #{{ blog_item.id }} by {{ blog_item.user.username }}" height="250">
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% include 'utls_template/alert.html' with bt_theme="info" bt_text="Фотографии не прикреплены" %}
+                {% endif %}
+            </div><br><br>
+            <b>Дата создания:</b> {{ blog_item.create_at|date:"d.m.Y H:i:s" }}
+            <b>Дата обновления:</b> {{ blog_item.updated_at|date:"d.m.Y H:i:s" }}
+            <hr>
+        {% endfor %}
+    {% else %}
+        {% include 'utls_template/alert.html' with bt_theme="info" bt_text="У Вас еще нет блогов" %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base_template/base_template.html' %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+        {% include 'auth_template/buttons/blog_buttons.html' %}
+    {% else %}
+        {% include 'utls_template/alert.html' with bt_theme="warning" bt_text="Чтобы добавить блог, нужно авторизоваться" %}
+    {% endif %}
+    {% if blog_list %}
+        {% for blog_item in blog_list %}
+            <b>{% trans "tid_label_header" %}:</b> {{ blog_item.header }}<br><br>
+            <b>{% trans "tid_label_content" %}:</b> {{ blog_item.content }}<br><br>
+            <b>{% trans "tid_label_images" %} ({{ blog_item.blog_photos.all|length }}):</b>
+            <div class="row">
+                {% if blog_item.blog_photos.all|length %}
+                    {% for image in blog_item.blog_photos.all %}
+                        <div class="d-inline">
+                            <img class="blog-image" src="{% get_media_prefix %}{{ image.image }}" alt="image #{{ image.id }} of blog #{{ blog_item.id }} by {{ blog_item.user.username }}" height="250">
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% trans "tid_messages_blog_no_images" as message_blog_no_images %}
+                    {% include 'utls_template/alert.html' with bt_theme="info" bt_text=message_blog_no_images %}
+                {% endif %}
+            </div><br><br>
+            <b>{% trans "tid_blog_label_created_at" %}:</b> {{ blog_item.create_at|date:"d.m.Y H:i:s" }}
+            <b>{% trans "tid_blog_label_updated_at" %}:</b> {{ blog_item.updated_at|date:"d.m.Y H:i:s" }}
+            <hr>
+        {% endfor %}
+    {% else %}
+        {% trans "tid_messages_blog_noone" as message_blog_noone %}
+        {% include 'utls_template/alert.html' with bt_theme="info" bt_text=message_blog_noone %}
+    {% endif %}
+{% endblock %}

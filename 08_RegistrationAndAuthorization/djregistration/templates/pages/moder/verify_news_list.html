@@ -1,0 +1,65 @@
+{% extends 'base_template/base_template.html' %}
+{% load poll_extras %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+        {% if request.user|has_group:"Модераторы" %}
+            {% if msg %}
+                {% include 'utls_template/alert.html' with bt_theme="success" bt_text=msg %}
+            {% endif %}
+            {% if news_list_moder %}
+                {% url 'page_news_moder_publish'   as action_news_publish %}
+                {% for news_item in news_list_moder %}
+                    <div class="row mb-2">
+                        <div class="col-1">
+                            ID#{{ news_item.id }}
+                        </div>
+                        <div class="col">
+                            {% url 'page_my_news_detail_moder' news_item.id as link_news_detail_moder %}
+                            <a href="{{ link_news_detail_moder }}"><b>{{ news_item.header }}</b></a>
+                        </div>
+                        <div class="col text-center">
+                            <b>Создано:</b><br>
+                            {{ news_item.create_at|date:"d.m.Y H:i:s" }}
+                        </div>
+                        <div class="col text-center">
+                            <b>Обновлено:</b><br>
+                            {{ news_item.updated_at|date:"d.m.Y H:i:s" }}
+                        </div>
+                        <div class="col text-center">
+                            <b>Опубликовано:</b><br>
+                            {% if not news_item.published %}
+                                Пока нет
+                            {% else %}
+                                {{ news_item.updated_at|date:"d.m.Y H:i:s" }}
+                            {% endif %}
+
+                        </div>
+                        <div class="col-2">
+                            {% if news_item.published %}
+                                Опубликовано
+                            {% else %}
+                                <form action="{{ action_news_publish }}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="news_id" value="{{ news_item.id }}">
+                                    <input class="btn btn-primary" type="submit" name="sub" value="Опубликовать">
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row mt-0">
+                        <div class="col">
+                            {{ news_item.content }}
+                        </div>
+                    </div>
+                    <div class="dropdown-divider mb-5"></div>
+                {% endfor %}
+            {% else %}
+                {% include 'utls_template/alert.html' with bt_theme="info" bt_text="Нет непромодерированных новостей" %}
+            {% endif %}
+        {% else %}
+            {% include 'utls_template/alert.html' with bt_theme="danger" bt_text="У вас нет прав" %}
+        {% endif %}
+    {% else %}
+        {% include 'utls_template/alert.html' with bt_theme="danger" bt_text="Нужна авторизация" %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base_template/base_template.html' %}
+{% load i18n %}
+{% block content %}
+    {% if shop_list %}
+        {% for shop in shop_list %}
+            {% include 'utls_template/alert.html' with bt_theme="primary" bt_text=shop %}
+            {% for offer in shop.offers.all %}
+                {% include 'utls_template/alert.html' with bt_theme="info" bt_text=offer.title %}
+                {{ offer.description }}
+                <hr>
+            {% endfor %}
+            {% for promotion in shop.promotions.all %}
+                {% include 'utls_template/alert.html' with bt_theme="success" bt_text=promotion.title %}
+                {{ promotion.description }}
+                <hr>
+            {% endfor %}
+            <hr>
+            <hr>
+            <hr>
+        {% endfor %}
+    {% else %}
+        {% trans "Список магазинов пока пуст" as message_general_shop_list_empty %}
+        {% include 'utls_template/alert.html' with bt_theme="warning" bt_text=message_general_shop_list_empty %}
+    {% endif %}
+{% endblock %}

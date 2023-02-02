@@ -1,0 +1,308 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-23 20:02+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\app_shop\apps.py:8
+msgid "Приложение «Магазины»"
+msgstr "Application «Shops»"
+
+#: .\app_shop\models.py:10
+msgid "Название магазина"
+msgstr "Shop name"
+
+#: .\app_shop\models.py:15 .\app_users\templates\profile\index.html:69
+msgid "Акции"
+msgstr "Promotions"
+
+#: .\app_shop\models.py:20 .\app_users\templates\profile\index.html:70
+msgid "Предложения"
+msgstr "Offers"
+
+#: .\app_shop\models.py:34
+msgid "магазин"
+msgstr "shop"
+
+#: .\app_shop\models.py:35
+msgid "магазины"
+msgstr "shops"
+
+#: .\app_shop\models.py:42 .\app_shop\models.py:71
+msgid "Заголовок"
+msgstr "Header"
+
+#: .\app_shop\models.py:46 .\app_shop\models.py:75
+msgid "Описание"
+msgstr "Description"
+
+#: .\app_shop\models.py:51 .\app_shop\models.py:80
+msgid "Срок окончания"
+msgstr "Expire at"
+
+#: .\app_shop\models.py:55 .\app_shop\models.py:84
+msgid "Архив"
+msgstr "Archived"
+
+#: .\app_shop\models.py:63
+msgid "акция"
+msgstr "promotion"
+
+#: .\app_shop\models.py:64
+msgid "акции"
+msgstr "promotions"
+
+#: .\app_shop\models.py:92
+msgid "предложение"
+msgstr "offer"
+
+#: .\app_shop\models.py:93
+msgid "предложения"
+msgstr "offers"
+
+#: .\app_shop\models.py:100 .\app_users\models.py:12
+#: .\app_users\templates\profile\index.html:14
+msgid "Пользователь"
+msgstr "Username"
+
+#: .\app_shop\models.py:106 .\app_users\templates\profile\index.html:108
+msgid "Количество товара"
+msgstr "Goods amount"
+
+#: .\app_shop\models.py:110 .\app_users\templates\profile\index.html:109
+msgid "Сумма покупки"
+msgstr "Total price"
+
+#: .\app_shop\models.py:114 .\app_users\templates\profile\index.html:110
+msgid "Дата покупки"
+msgstr "Paid at"
+
+#: .\app_shop\models.py:122
+msgid "покупка"
+msgstr "order"
+
+#: .\app_shop\models.py:123
+msgid "покупки"
+msgstr "orders"
+
+#: .\app_shop\views.py:13
+msgid "Список магазинов"
+msgstr "Shop list"
+
+#: .\app_users\apps.py:8
+msgid "Приложение «Пользователи»"
+msgstr "Application «Users»"
+
+#: .\app_users\forms.py:19 .\app_users\forms.py:39
+#: .\templates\pages\auth\auth.html:10 .\templates\pages\auth\reg.html:9
+msgid "Логин"
+msgstr "Username"
+
+#: .\app_users\forms.py:27 .\app_users\forms.py:49
+#: .\templates\pages\auth\auth.html:16 .\templates\pages\auth\reg.html:15
+msgid "Пароль"
+msgstr "Password"
+
+#: .\app_users\forms.py:59 .\templates\pages\auth\reg.html:22
+msgid "Повторите пароль"
+msgstr "Repeat password"
+
+#: .\app_users\forms.py:70 .\app_users\forms.py:138
+#: .\app_users\templates\profile\index.html:135
+#: .\templates\pages\auth\reg.html:28
+msgid "Ваше имя"
+msgstr "First name"
+
+#: .\app_users\forms.py:80 .\app_users\forms.py:148
+#: .\app_users\templates\profile\index.html:141
+#: .\templates\pages\auth\reg.html:34
+msgid "Ваша фамилия"
+msgstr "Last name"
+
+#: .\app_users\forms.py:90 .\app_users\forms.py:159 .\app_users\models.py:22
+#: .\app_users\templates\profile\index.html:28
+#: .\app_users\templates\profile\index.html:147
+#: .\templates\pages\auth\reg.html:40
+msgid "Дата рождения"
+msgstr "Birthday"
+
+#: .\app_users\forms.py:101 .\app_users\forms.py:170 .\app_users\models.py:17
+#: .\app_users\templates\profile\index.html:35
+#: .\app_users\templates\profile\index.html:153
+#: .\templates\pages\auth\reg.html:46
+msgid "Город проживания"
+msgstr "City"
+
+#: .\app_users\forms.py:111 .\app_users\forms.py:180 .\app_users\models.py:27
+#: .\app_users\templates\profile\index.html:42
+#: .\app_users\templates\profile\index.html:159
+#: .\templates\pages\auth\reg.html:52
+msgid "Телефон"
+msgstr "Phone"
+
+#: .\app_users\forms.py:121
+msgid "Ответ"
+msgstr "Solution"
+
+#: .\app_users\models.py:30 .\app_users\templates\profile\index.html:178
+msgid "Аватар"
+msgstr "Avatar"
+
+#: .\app_users\models.py:36 .\app_users\templates\profile\index.html:66
+msgid "Баланс"
+msgstr "Balance"
+
+#: .\app_users\models.py:41
+msgid "профиль"
+msgstr "profile"
+
+#: .\app_users\models.py:42
+msgid "профили"
+msgstr "profiles"
+
+#: .\app_users\templates\profile\index.html:21
+msgid "Полное имя"
+msgstr "Full name"
+
+#: .\app_users\templates\profile\index.html:71
+msgid "История покупок"
+msgstr "Orders history"
+
+#: .\app_users\templates\profile\index.html:86
+msgid "Нет доступных акций"
+msgstr "No promotions yet"
+
+#: .\app_users\templates\profile\index.html:99
+msgid "Нет доступных предложений"
+msgstr "No offers yet"
+
+#: .\app_users\templates\profile\index.html:114
+msgid "У Вас еще нет покупок"
+msgstr "You have no orders yet"
+
+#: .\app_users\templates\profile\index.html:123
+msgid "Редактировать профиль"
+msgstr "Editing profile"
+
+#: .\app_users\templates\profile\index.html:182
+msgid "Выбрать файл"
+msgstr "Choose the file"
+
+#: .\app_users\templates\profile\index.html:191
+msgid "Обновить данные"
+msgstr "Update profile"
+
+#: .\app_users\templates\profile\index.html:199
+msgid "У Вас нет доступа к данному разделу!"
+msgstr "You have not access to this page!"
+
+#: .\app_users\views.py:32
+#, python-brace-format
+msgid "Профиль{username}"
+msgstr "Profile{username}"
+
+#: .\app_users\views.py:120
+msgid "Профиль успешно обновлён"
+msgstr "Profile was updated"
+
+#: .\app_users\views.py:124
+msgid "Неавторизованным пользователям нет доступа к редактированию профиля"
+msgstr "You have not access to update the profile"
+
+#: .\app_users\views.py:134
+msgid "Авторизация"
+msgstr "Sign in"
+
+#: .\app_users\views.py:169 .\templates\pages\auth\reg.html:63
+msgid "Регистрация"
+msgstr "Sign up"
+
+#: .\app_users\views.py:211
+msgid "Решение должно быть числом!"
+msgstr "The solution has to be number!"
+
+#: .\app_users\views.py:247
+msgid "Проблема с добавлением профиля в БД"
+msgstr "Problem with add the profile to DB"
+
+#: .\app_users\views.py:249
+msgid "Проблема с добавлением пользователя в БД"
+msgstr "Problem with add the user to DB"
+
+#: .\app_users\views.py:252
+msgid "Пример решен неверно!"
+msgstr "Solution is wrong!"
+
+#: .\app_users\views.py:306
+msgid "О пользователе"
+msgstr "About user"
+
+#: .\templates\auth_template\index.html:28
+msgid "Мой профиль"
+msgstr "My profile"
+
+#: .\templates\auth_template\index.html:35
+msgid "Выход"
+msgstr "Log out"
+
+#: .\templates\auth_template\index.html:39
+msgid "Аутентификация"
+msgstr "Sign in"
+
+#: .\templates\auth_template\index.html:44 .\templates\pages\auth\auth.html:22
+msgid "Войти"
+msgstr "Log in"
+
+#: .\templates\auth_template\index.html:45
+msgid "Зарегистрироваться"
+msgstr "Sign up"
+
+#: .\templates\base_template\base_template.html:74
+msgid "Админка"
+msgstr "Admins"
+
+#: .\templates\general\locales.html:30 .\templates\general\locales.html:31
+msgid "Переключить на Английский"
+msgstr ""
+
+#: .\templates\general\locales.html:38 .\templates\general\locales.html:39
+msgid "Переключить на Русский"
+msgstr "Переключиться на Русский"
+
+#: .\templates\pages\auth\auth.html:25
+msgid "Вы уже авторизованы"
+msgstr "You are signed in yet"
+
+#: .\templates\pages\auth\reg.html:9
+msgid "для входа"
+msgstr "for log in"
+
+#: .\templates\pages\auth\reg.html:15
+msgid "сгенерировать пароль"
+msgstr "generate password"
+
+#: .\templates\pages\auth\reg.html:58
+msgid "Капча. Решите пример"
+msgstr "Solution captcha"
+
+#: .\templates\pages\auth\reg.html:87
+msgid "Вы уже зарегистрированы"
+msgstr "You are signed up yet"
+
+#: .\templates\pages\shop\shop_list.html:22
+msgid "Список магазинов пока пуст"
+msgstr "Shop list is empty"

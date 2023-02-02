@@ -1,0 +1,57 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+    <form action="" method="post">
+
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="form-group">
+            <h4 class="display-6">Начало периода:</h4>
+            {{ form.date_from.errors }}
+            {{ form.date_from }}
+        </div>
+
+        <div class="form-group">
+            <h4 class="display-6">Конец периода:</h4>
+            {{ form.date_to.errors }}
+            {{ form.date_to }}
+        </div>
+
+        <div class="form-group mb-4">
+            <input class="btn btn-lg btn-primary col" type="submit" name="sub" value="Показать">
+        </div>
+
+    </form>
+
+    {% if goods_list|length %}
+        <table class="table">
+            <thead>
+            <th class="text-center font-weight-bold" width="1%">ID</th>
+            <th class="text-center font-weight-bold">Название</th>
+            <th class="text-center font-weight-bold" width="1%">Количество проданных единиц</th>
+            <th class="text-center font-weight-bold" width="1%">Сумма продаж</th>
+            </thead>
+            <tbody>
+                {% for good_sell in goods_list %}
+                    <tr>
+                        <td class="text-center">
+{#                            {{ good_sell }}#}
+{#                            {{ good_sell.amount }}#}
+                            {{ good_sell.good.id }}
+                        </td>
+                        <td>
+                            {{ good_sell.good.title }}
+                        </td>
+                        <td class="text-center">
+                            {{ good_sell.amount }}
+                        </td>
+                        <td class="text-center">
+                            {{ good_sell.total_summa }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% load static %}
+<div class="good-item">
+    <div class="good-title">
+        {% url 'page_market_item' good.id  as link_good_detail %}
+        <a href="{{ link_good_detail }}">{{ good.title }}</a>
+    </div>
+    <hr>
+    <div class="good-price">
+        <b>Цена:</b> ${{ good.price }}
+    </div>
+{#    <hr>#}
+{#    <div class="good-add">#}
+{#        <button class="btn btn-info btn-sm col">Добавить в корзину</button>#}
+{#    </div>#}
+    <hr>
+    <div class="face-image text-center">
+        <img src="{% get_media_prefix %}{{ good.face_image }}" alt="{{ good.title }}" title="{{ good.title }}" width="100">
+    </div>
+
+</div>

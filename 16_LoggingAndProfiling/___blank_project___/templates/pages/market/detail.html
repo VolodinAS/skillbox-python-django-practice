@@ -1,0 +1,71 @@
+{% extends 'base_template/base_template.html' %}
+{% load static %}
+{% block content %}
+    {% if request.GET.status %}
+        {% include 'utls_template/alert.html' with bt_theme="success" bt_text="Товар успешно добавлен в корзину!" %}
+    {% endif %}
+    <table width="100%" class="tbc">
+        <tr>
+            <td colspan="2">
+                <h1 class="display-3">{{ good_item.title }}</h1>
+            </td>
+        </tr>
+        <tr>
+            <td width="50%" valign="top" class="p-3">
+                <img src="{% get_media_prefix %}{{ good_item.face_image }}" width="400" alt="">
+            </td>
+            <td valign="top" class="p-3">
+                <h4 class="display-5 mb-5"><b>Цена:</b> ${{ good_item.price }}</h4>
+
+                <h4 class="display-5 mb-5"><b>Описание:</b> {{ good_item.description }}</h4>
+
+                <h4 class="display-5 mb-5"><b>Магазин:</b> {{ good_item.shop.title }}</h4>
+
+                {% include 'auth_template/buttons/add_to_cart.html' %}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="bg-secondary">
+
+{#                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">#}
+{#                    <div class="carousel-inner" style="background-color: #fff">#}
+{#                        #}
+{#                    </div>#}
+{#                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">#}
+{#                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>#}
+{#                        <span class="sr-only">Предыдущий</span>#}
+{#                    </a>#}
+{#                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">#}
+{#                        <span class="carousel-control-next-icon" aria-hidden="true"></span>#}
+{#                        <span class="sr-only">Следующий</span>#}
+{#                    </a>#}
+{#                </div>#}
+
+                <div id="carouselExampleIndicators" class="carousel slide bg-secondary" data-ride="carousel" style="background-color: #fff">
+                    <ol class="carousel-indicators">
+                        {% for good_images in good_item.image_good_images.all %}
+                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}></li>
+                        {% endfor %}
+                    </ol>
+                    <div class="text-center carousel-inner bg-secondary">
+                        {% for good_images in good_item.image_good_images.all %}
+                            <div class=" bg-secondarytext-center carousel-item {% if forloop.first %}active{% endif %}">
+                                <img src="{% get_media_prefix %}{{ good_images.image }}" class=" w-50" alt="">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev bg-secondary" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon bg-secondary" aria-hidden="true"></span>
+                        <span class="sr-only bg-secondary">Предыдущий</span>
+                    </a>
+                    <a class="carousel-control-next bg-secondary" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon bg-secondary" aria-hidden="true"></span>
+                        <span class="sr-only bg-secondary">Следующий</span>
+                    </a>
+                </div>
+
+            </td>
+        </tr>
+    </table>
+    {{ cart }}
+{% endblock %}

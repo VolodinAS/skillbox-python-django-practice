@@ -1,0 +1,30 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+        {% include 'auth_template/buttons/blog_buttons.html' %}
+    {% else %}
+        {% include 'utls_template/alert.html' with bt_theme="warning" bt_text="Чтобы добавить блог, нужно авторизоваться" %}
+    {% endif %}
+    {% if blog_list %}
+        {% for blog_item in blog_list %}
+            <div class="row">
+                <div class="col-auto text-center">
+                    {% include 'utls_template/avatar.html' with item_element=blog_item %}
+                </div>
+                <div class="col">
+                    Блог <b>«{{ blog_item.header }}»</b>
+                    <div class="text-muted small">
+                        <b>Создан:</b> {{ blog_item.create_at|date:"d.m.Y H:i:s" }}
+                    </div><br>
+                    «{{ blog_item.content|truncatechars:100 }}»<br><br>
+                    {% url 'page_blog_detail' blog_item.id  as link_blog_detail %}
+                    <a href="{{ link_blog_detail }}" target="_blank"><b>Читать дальше »»</b></a>
+                </div>
+            </div>
+
+            <hr>
+        {% endfor %}
+    {% else %}
+
+    {% endif %}
+{% endblock %}

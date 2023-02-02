@@ -1,0 +1,6 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+    {% if msg %}
+        {% include 'utls_template/alert.html' with bt_theme=msg_theme bt_text=msg %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base_template/base_template.html' %}
+{% load i18n %}
+{% load poll_extras %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+        {% if request.user|has_group:"Верифицированные пользователи" or request.user|has_group:"Модераторы" %}
+            {% include 'auth_template/buttons/news_buttons.html' %}
+        {% else %}
+            {% trans "tid_messages_news_list_denied" as message_news_list_denied %}
+{#            У вас нет прав на добавление новостей. Ожидайте верификацию профиля...#}
+            {% include 'utls_template/alert.html' with bt_theme="danger" bt_text=message_news_list_denied %}
+        {% endif %}
+    {% endif %}
+    <hr>
+    {% if news_list %}
+        {% for news_item in news_list %}
+            {% include 'pages/news/news_item.html' %}
+        {% endfor %}
+    {% else %}
+        {% trans "tid_messages_news_list_noone" as message_news_list_noone %}
+{#        Пока еще нет новостей#}
+        {% include 'utls_template/alert.html' with bt_theme="warning" bt_text=message_news_list_noone %}
+    {% endif %}
+{% endblock %}

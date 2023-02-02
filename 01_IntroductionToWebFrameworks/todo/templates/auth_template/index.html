@@ -1,0 +1,12 @@
+<li class="nav-item">
+    <div class="nav-link">
+        {% if request.user.is_authenticated %}
+            {% url 'auth_logout'   as link_logout %}
+            {{ request.user.username }} | <a href="{{ link_logout }}">Выход</a>
+        {% else %}
+            {% url 'auth_login'   as link_login %}
+            {% url 'auth_reg'   as link_reg %}
+            <a href="{{ link_login }}">Войти</a> | <a href="{{ link_reg }}">Регистрация</a>
+        {% endif %}
+    </div>
+</li>

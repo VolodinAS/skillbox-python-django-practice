@@ -1,0 +1,665 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-12-14 03:47+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\app_blog\apps.py:11
+msgid "tid_admin_blog"
+msgstr "Приложение «Блоги»"
+
+#: .\app_blog\forms.py:12 .\app_news\forms.py:14
+msgid "tid_blog_form_placeholder_header"
+msgstr "Заголовок, 200 символов"
+
+#: .\app_blog\forms.py:22 .\app_news\forms.py:24
+msgid "tid_blog_form_placeholder_content"
+msgstr "Текст, 5000 символов"
+
+#: .\app_blog\models.py:13 .\app_comments\models.py:20 .\app_news\models.py:35
+#: .\app_users\models.py:11
+msgid "tid_models_blog_user"
+msgstr "Пользователь DJDB"
+
+#: .\app_blog\models.py:18 .\app_news\models.py:12
+#: .\templates\pages\blog\add\add.html:13
+#: .\templates\pages\blog\myblog\myblog.html:12
+#: .\templates\pages\news\add.html:15
+msgid "tid_label_header"
+msgstr "Заголовок"
+
+#: .\app_blog\models.py:21 .\app_comments\models.py:27
+msgid "tid_models_blog_text"
+msgstr "Текст"
+
+#: .\app_blog\models.py:26 .\app_comments\models.py:32 .\app_news\models.py:21
+#: .\templates\pages\blog\detail\detail.html:15
+#: .\templates\pages\blog\index\index.html:19
+#: .\templates\pages\blog\myblog\myblog.html:27
+#: .\templates\pages\moder\verify_news_list.html:22
+#: .\templates\pages\news\my.html:26
+msgid "tid_blog_label_created_at"
+msgstr "Создан"
+
+#: .\app_blog\models.py:30 .\app_news\models.py:25
+#: .\templates\pages\blog\detail\detail.html:16
+#: .\templates\pages\blog\myblog\myblog.html:28
+#: .\templates\pages\moder\verify_news_list.html:26
+#: .\templates\pages\news\my.html:30
+msgid "tid_blog_label_updated_at"
+msgstr "Обновлён"
+
+#: .\app_blog\models.py:37 .\app_blog\models.py:51
+msgid "tid_models_blog_meta_vn"
+msgstr "блог"
+
+#: .\app_blog\models.py:38
+msgid "tid_models_blog_meta_vnp"
+msgstr "блоги"
+
+#: .\app_blog\models.py:54 .\templates\pages\blog\add\add.html:25
+#: .\templates\pages\blog\myblog\myblog.html:14
+msgid "tid_label_images"
+msgstr "Изображения"
+
+#: .\app_blog\models.py:60
+msgid "tid_models_blog_images_upload_at"
+msgstr "Дата загрузки"
+
+#: .\app_blog\models.py:65
+msgid "tid_models_blog_images_meta_vn"
+msgstr "фотка блога"
+
+#: .\app_blog\models.py:66
+msgid "tid_models_blog_images_meta_vnp"
+msgstr "фотки блога"
+
+#: .\app_blog\views.py:22 .\templates\base_template\base_template.html:73
+msgid "tid_headermenu_blogs"
+msgstr "Блоги"
+
+#: .\app_blog\views.py:47 .\templates\auth_template\index.html:34
+msgid "tid_headermenu_profile_my_blog"
+msgstr "Мой блог"
+
+#: .\app_blog\views.py:77
+msgid "tid_views_blog_read"
+msgstr "Читать блог"
+
+#: .\app_blog\views.py:93 .\templates\auth_template\buttons\blog_buttons.html:5
+#: .\templates\pages\blog\add\add.html:31
+msgid "tid_buttons_blog_add"
+msgstr "Добавить блог"
+
+#: .\app_blog\views.py:134
+msgid "tid_messages_system_views_blogs_mysql"
+msgstr "Проблема при создании блога!"
+
+#: .\app_blog\views.py:139 .\app_news\views.py:100
+#: .\templates\pages\news\detail.html:72
+msgid "tid_messages_news_comment_denied"
+msgstr "Для того, чтобы комментировать новости, сначала надо авторизоваться"
+
+#: .\app_blog\views.py:150
+msgid "tid_buttons_blogs_import"
+msgstr "Импортировать блог"
+
+#: .\app_blog\views.py:189
+msgid "tid_messages_system_views_blogs_import_encode"
+msgstr "Кодировка файла не распознана"
+
+#: .\app_blog\views.py:207 .\app_blog\views.py:238
+msgid "tid_messages_system_views_blogs_import_date"
+msgstr ""
+"В файле {csv_file} дата публикации должна быть в формате «дд.мм.гггг чч:мм»"
+
+#: .\app_blog\views.py:223
+msgid "tid_messages_system_views_blogs_import_item"
+msgstr "Проблема с добавлением файла блога «{header}» из файла {csv_file}!"
+
+#: .\app_blog\views.py:228
+msgid "tid_messages_system_views_blogs_import_text"
+msgstr "В файле {csv_file} длина контента должна быть от 1 до 5000 символов"
+
+#: .\app_blog\views.py:233
+msgid "tid_messages_system_views_blogs_import_header"
+msgstr "В файле {csv_file} длина заголовка должна быть от 1 до 200 символов"
+
+#: .\app_blog\views.py:245
+msgid "tid_messages_system_views_blogs_import_error"
+msgstr "Что-то пошло не так при импорте файлов..."
+
+#: .\app_blog\views.py:248
+msgid "tid_messages_system_views_blogs_import_no_files"
+msgstr "Нет загружаемых файлов"
+
+#: .\app_blog\views.py:256
+msgid "tid_messages_blogs_import_auth"
+msgstr "Для того, чтобы импортировать блоги, нужно авторизоваться"
+
+#: .\app_comments\apps.py:8
+msgid "tid_admin_comments"
+msgstr "Приложение «Комментарии»"
+
+#: .\app_comments\forms.py:13
+msgid "tid_comment_form_text"
+msgstr "Текст комментария"
+
+#: .\app_comments\models.py:16 .\app_news\views.py:25
+#: .\templates\base_template\base_template.html:68
+msgid "tid_headermenu_news"
+msgstr "Новости"
+
+#: .\app_comments\models.py:36
+msgid "tid_models_comments_meta_vn"
+msgstr "комментарий"
+
+#: .\app_comments\models.py:37
+msgid "tid_models_comments_meta_vnp"
+msgstr "комментарии"
+
+#: .\app_news\apps.py:8
+msgid "tid_admin_news"
+msgstr "Приложение «Новости»"
+
+#: .\app_news\forms.py:35
+msgid "tid_news_form_placeholder_tag"
+msgstr "Тег, 20 символов"
+
+#: .\app_news\forms.py:48
+msgid "tid_tag_search_form_placeholder_tag"
+msgstr "Искомый тег, 20 символов"
+
+#: .\app_news\forms.py:59
+msgid "tid_tag_search_form_placeholder_date"
+msgstr "От даты"
+
+#: .\app_news\models.py:16 .\templates\pages\blog\add\add.html:19
+#: .\templates\pages\blog\myblog\myblog.html:13
+#: .\templates\pages\news\add.html:21
+msgid "tid_label_content"
+msgstr "Содержимое"
+
+#: .\app_news\models.py:29 .\app_news\models.py:43
+#: .\templates\pages\moder\verify_news_list.html:30
+#: .\templates\pages\news\detail.html:24 .\templates\pages\news\my.html:34
+#: .\templates\pages\news\news_item.html:17
+msgid "tid_news_label_published_at"
+msgstr "Опубликовано"
+
+#: .\app_news\models.py:47
+msgid "tid_models_news_item_published_by"
+msgstr "Кем опубликовано DJDB"
+
+#: .\app_news\models.py:54 .\templates\pages\news\add.html:27
+msgid "tid_label_tag"
+msgstr "Тег"
+
+#: .\app_news\models.py:62
+msgid "tid_models_news_meta_vn"
+msgstr "новость"
+
+#: .\app_news\models.py:63
+msgid "tid_models_news_meta_vnp"
+msgstr "новости"
+
+#: .\app_news\models.py:67
+msgid "tid_models_news_meta_perm_can_publish"
+msgstr "Может публиковать"
+
+#: .\app_news\views.py:52
+msgid "tid_views_news_item_read"
+msgstr "Просмотр новости"
+
+#: .\app_news\views.py:92
+msgid "tid_views_news_item_comment_add"
+msgstr "Комментарий добавлен"
+
+#: .\app_news\views.py:96
+msgid "tid_views_news_item_comment_error"
+msgstr "Ошибка при добавлении комментария..."
+
+#: .\app_news\views.py:111
+#: .\templates\auth_template\buttons\news_buttons.html:3
+#: .\templates\pages\news\add.html:33
+msgid "tid_buttons_news_add"
+msgstr "Добавить новость"
+
+#: .\app_news\views.py:145
+msgid "tid_views_add_news_mysql"
+msgstr "Проблема с добавлением новости в БД"
+
+#: .\app_news\views.py:147 .\templates\pages\news\index.html:9
+msgid "tid_messages_news_list_denied"
+msgstr "У вас нет прав на добавление новостей. Ожидайте верификацию профиля"
+
+#: .\app_news\views.py:149 .\app_news\views.py:215
+#: .\templates\pages\moder\verify_news_list.html:66
+#: .\templates\pages\moder\verify_users.html:37
+#: .\templates\pages\news\add.html:41 .\templates\pages\news\my.html:75
+msgid "tid_messages_system_need_auth"
+msgstr "Чтобы продолжить, нужно авторизоваться"
+
+#: .\app_news\views.py:165 .\templates\auth_template\index.html:32
+msgid "tid_headermenu_profile_my_news"
+msgstr "Мои новости"
+
+#: .\app_news\views.py:201
+msgid "tid_views_news_edit_title"
+msgstr "Редактирование новости"
+
+#: .\app_news\views.py:212
+msgid "tid_views_news_edit_info"
+msgstr "Тут детали новости"
+
+#: .\app_news\views.py:231
+msgid "tid_views_news_moder_title"
+msgstr "Модерация новостей"
+
+#: .\app_news\views.py:261
+msgid "tid_views_news_moder_title_item"
+msgstr "Модерирование новости"
+
+#: .\app_news\views.py:277
+msgid "tid_views_news_moder_title_publish"
+msgstr "Публикация новости"
+
+#: .\app_news\views.py:299
+msgid "tid_views_news_moder_publish_success"
+msgstr "Новость <b>«{news.header}»</b> опубликована!"
+
+#: .\app_news\views.py:301
+msgid "tid_views_news_moder_publish_error"
+msgstr "Не указан ID новости!"
+
+#: .\app_news\views.py:312 .\templates\pages\news\tagsearch.html:8
+#: .\templates\pages\news\tagsearch.html:12
+msgid "tid_tag_search_form_label"
+msgstr "Поиск по тегу"
+
+#: .\app_users\apps.py:8
+msgid "tid_admin_profiles"
+msgstr "Приложение «Профили»"
+
+#: .\app_users\forms.py:19 .\app_users\forms.py:40
+#: .\templates\pages\auth\auth.html:11 .\templates\pages\auth\reg.html:9
+msgid "tid_form_labels_auth_login"
+msgstr "Логин"
+
+#: .\app_users\forms.py:28 .\app_users\forms.py:51
+#: .\templates\pages\auth\auth.html:17 .\templates\pages\auth\reg.html:15
+msgid "tid_form_labels_auth_password"
+msgstr "Пароль"
+
+#: .\app_users\forms.py:62 .\templates\pages\auth\reg.html:22
+msgid "tid_form_labels_reg_password_repeat"
+msgstr "Повторите пароль"
+
+#: .\app_users\forms.py:74 .\app_users\forms.py:143
+#: .\app_users\templates\profile\index.html:77
+#: .\templates\pages\auth\reg.html:28
+msgid "tid_form_labels_reg_first_name"
+msgstr "Ваше имя"
+
+#: .\app_users\forms.py:84 .\app_users\forms.py:153
+#: .\app_users\templates\profile\index.html:83
+#: .\templates\pages\auth\reg.html:34
+msgid "tid_form_labels_reg_last_name"
+msgstr "Ваша фамилия"
+
+#: .\app_users\forms.py:95 .\app_users\forms.py:164 .\app_users\models.py:21
+#: .\app_users\templates\profile\index.html:28
+#: .\app_users\templates\profile\index.html:89
+#: .\templates\pages\auth\reg.html:40
+msgid "tid_form_labels_reg_birthday"
+msgstr "Дата рождения"
+
+#: .\app_users\forms.py:106 .\app_users\forms.py:175 .\app_users\models.py:16
+#: .\app_users\templates\profile\index.html:35
+#: .\app_users\templates\profile\index.html:95
+#: .\templates\pages\auth\reg.html:46
+msgid "tid_form_labels_reg_city"
+msgstr "Город проживания"
+
+#: .\app_users\forms.py:116 .\app_users\forms.py:185 .\app_users\models.py:25
+#: .\app_users\templates\profile\index.html:42
+#: .\app_users\templates\profile\index.html:101
+#: .\templates\pages\auth\reg.html:52
+msgid "tid_form_labels_reg_phone"
+msgstr "Телефон"
+
+#: .\app_users\forms.py:126
+msgid "tid_form_labels_reg_captcha_solution"
+msgstr "Ответ"
+
+#: .\app_users\models.py:38
+msgid "tid_models_profiles_meta_vn"
+msgstr "профиль"
+
+#: .\app_users\models.py:39
+msgid "tid_models_profiles_meta_vnp"
+msgstr "профили"
+
+#: .\app_users\templates\profile\index.html:14
+msgid "tid_page_view_profile_username"
+msgstr "Пользователь"
+
+#: .\app_users\templates\profile\index.html:21
+msgid "tid_page_view_profile_full_name"
+msgstr "Полное имя"
+
+#: .\app_users\templates\profile\index.html:52
+#: .\app_users\templates\profile\index.html:56
+msgid "tid_page_groups"
+msgstr "Группа"
+
+#: .\app_users\templates\profile\index.html:52
+msgid "tid_page_groups_verif"
+msgstr "Верифицированные пользователи"
+
+#: .\app_users\templates\profile\index.html:56
+msgid "tid_page_groups_moder"
+msgstr "Модераторы"
+
+#: .\app_users\templates\profile\index.html:60
+msgid "tid_messages_profile_non_verif"
+msgstr "Ваш аккаунт еще не верифицирован! Дождитесь решения модератора!"
+
+#: .\app_users\templates\profile\index.html:64
+msgid "tid_messages_profile_non_group"
+msgstr "Группа пользователя не определена"
+
+#: .\app_users\templates\profile\index.html:113
+#: .\app_users\templates\profile\index.html:116
+msgid "tid_profile_no_avatar"
+msgstr "нет аватарки"
+
+#: .\app_users\templates\profile\index.html:120
+msgid "tid_form_profile_avatar"
+msgstr "Аватар"
+
+#: .\app_users\templates\profile\index.html:124
+msgid "tid_profile_avatar_choose_file"
+msgstr "Выберите файл"
+
+#: .\app_users\views.py:27
+msgid "tid_views_user_profile_title"
+msgstr "Профиль{username}"
+
+#: .\app_users\views.py:114
+msgid "tid_views_user_profile_success"
+msgstr "Профиль успешно обновлён!"
+
+#: .\app_users\views.py:119
+msgid "tid_views_user_profile_auth"
+msgstr "Неавторизованным пользователям нет доступа к редактированию профиля"
+
+#: .\app_users\views.py:129
+msgid "tid_views_login_title"
+msgstr "Авторизация"
+
+#: .\app_users\views.py:166
+msgid "tid_views_reg_title"
+msgstr "Регистрация"
+
+#: .\app_users\views.py:213
+msgid "tid_views_reg_form_error_captcha"
+msgstr "Решение должно быть числом!"
+
+#: .\app_users\views.py:246
+msgid "tid_views_reg_form_error_profile_mysql"
+msgstr "Проблема с добавлением профиля в БД"
+
+#: .\app_users\views.py:251
+msgid "tid_views_reg_form_error_mysql"
+msgstr "Проблема с добавлением пользователя в БД"
+
+#: .\app_users\views.py:257
+msgid "tid_views_reg_form_error_captcha_wrong"
+msgstr "Пример решен неверно!"
+
+#: .\app_users\views.py:268
+msgid "tid_views_verif_title"
+msgstr "Верификация"
+
+#: .\app_users\views.py:315
+msgid "tid_views_profile_title"
+msgstr "О пользователе"
+
+#: .\djregistration\settings.py:112
+msgid "tid_settings_lang_ru"
+msgstr "Русский"
+
+#: .\djregistration\settings.py:113
+msgid "tid_settings_lang_en"
+msgstr "Английский"
+
+#: .\templates\auth_template\buttons\blog_buttons.html:9
+#: .\templates\pages\blog\add\import.html:22
+msgid "tid_buttons_blog_import"
+msgstr "Импортировать блог"
+
+#: .\templates\auth_template\index.html:8
+msgid "tid_headermenu_moderation"
+msgstr "Модерация"
+
+#: .\templates\auth_template\index.html:12
+msgid "tid_headermenu_moderation_verify_users"
+msgstr "Вериф. польз."
+
+#: .\templates\auth_template\index.html:14
+msgid "tid_headermenu_moderation_moder_news"
+msgstr "Модер. новостей"
+
+#: .\templates\auth_template\index.html:29
+msgid "tid_headermenu_profile_me"
+msgstr "Мой профиль"
+
+#: .\templates\auth_template\index.html:36
+msgid "tid_headermenu_profile_quit"
+msgstr "Выход"
+
+#: .\templates\auth_template\index.html:40
+msgid "tid_headermenu_auth"
+msgstr "Аутентификация"
+
+#: .\templates\auth_template\index.html:45
+msgid "tid_headermenu_login"
+msgstr "Войти"
+
+#: .\templates\auth_template\index.html:46
+msgid "tid_headermenu_reg"
+msgstr "Зарегистрироваться"
+
+#: .\templates\base_template\base_template.html:77
+msgid "tid_headermenu_admin"
+msgstr "Админка"
+
+#: .\templates\general\locales.html:33 .\templates\general\locales.html:34
+msgid "tid_buttons_locale_switch_to_english"
+msgstr "Switch to English"
+
+#: .\templates\general\locales.html:41 .\templates\general\locales.html:42
+msgid "tid_buttons_locale_switch_to_russian"
+msgstr "Перейти на Русский"
+
+#: .\templates\pages\auth\auth.html:23
+msgid "tid_buttons_form_auth"
+msgstr "Авторизоваться"
+
+#: .\templates\pages\auth\auth.html:26
+msgid "tid_messages_form_auth_yet"
+msgstr "Вы уже авторизованы"
+
+#: .\templates\pages\auth\auth.html:30
+msgid "tid_messages_form_auth_time"
+msgstr "Авторизация доступна только с 08.00 по 23.59.59"
+
+#: .\templates\pages\auth\reg.html:9
+msgid "tid_form_labels_auth_desc"
+msgstr "для входа"
+
+#: .\templates\pages\auth\reg.html:15
+msgid "tid_buttons_form_gen_password"
+msgstr "сгенерировать пароль"
+
+#: .\templates\pages\auth\reg.html:58
+msgid "tid_form_labels_reg_captcha"
+msgstr "Решите капчу"
+
+#: .\templates\pages\auth\reg.html:63
+msgid "tid_buttons_form_reg"
+msgstr "Зарегистрироваться"
+
+#: .\templates\pages\auth\reg.html:87
+msgid "tid_messages_form_reg_yet"
+msgstr "Вы уже зарегистрированы"
+
+#: .\templates\pages\blog\add\add.html:36
+#: .\templates\pages\blog\index\index.html:7
+msgid "tid_messages_blog_add_auth"
+msgstr "Чтобы добавить блог, нужно авторизоваться"
+
+#: .\templates\pages\blog\add\import.html:13
+#: .\templates\pages\blog\add\import.html:17
+msgid "tid_blog_import"
+msgstr "Выберите CSV-файлы для импорта"
+
+#: .\templates\pages\blog\add\import.html:26
+msgid "tid_messages_blog_import_auth"
+msgstr "Для того, чтобы импортировать блоги, нужно авторизоваться"
+
+#: .\templates\pages\blog\detail\detail.html:30
+#: .\templates\pages\blog\myblog\myblog.html:23
+msgid "tid_messages_blog_no_images"
+msgstr "Изображения не прикреплены"
+
+#: .\templates\pages\blog\detail\detail.html:41
+msgid "tid_messages_blog_no_exists"
+msgstr "Блога не существует"
+
+#: .\templates\pages\blog\index\index.html:17
+msgid "tid_blog_label"
+msgstr "Блог"
+
+#: .\templates\pages\blog\index\index.html:23
+msgid "tid_links_blog_read_more"
+msgstr "Читать дальше"
+
+#: .\templates\pages\blog\myblog\myblog.html:32
+msgid "tid_messages_blog_noone"
+msgstr "У Вас еще нет блогов"
+
+#: .\templates\pages\moder\verify_news_list.html:32
+#: .\templates\pages\moder\verify_news_list.html:40
+#: .\templates\pages\news\my.html:36
+msgid "tid_news_label_not_published"
+msgstr "Пока нет"
+
+#: .\templates\pages\moder\verify_news_list.html:45
+msgid "tid_buttons_moder_news_publish"
+msgstr "Опубликовать"
+
+#: .\templates\pages\moder\verify_news_list.html:58
+msgid "tid_messages_moder_news_noone"
+msgstr "Нет непромодерированных новостей"
+
+#: .\templates\pages\moder\verify_news_list.html:62
+#: .\templates\pages\moder\verify_users.html:33
+#: .\templates\pages\news\add.html:37 .\templates\pages\news\my.html:71
+msgid "tid_messages_system_denied"
+msgstr "У Вас нет прав"
+
+#: .\templates\pages\moder\verify_users.html:20
+msgid "tid_buttons_moder_users_verify"
+msgstr "Верифицировать"
+
+#: .\templates\pages\moder\verify_users.html:22
+msgid "tid_buttons_moder_users_unverify"
+msgstr "Снять верификацию"
+
+#: .\templates\pages\moder\verify_users.html:29
+msgid "tid_messages_moder_user_noone"
+msgstr "Нет неверифицированных пользователей"
+
+#: .\templates\pages\news\detail.html:17
+msgid "tid_label_author"
+msgstr "Автор"
+
+#: .\templates\pages\news\detail.html:50
+msgid "tid_messages_news_comments_noone"
+msgstr "Пока еще нет комментариев к новости. <b>Будьте первым!</b>"
+
+#: .\templates\pages\news\detail.html:63
+msgid "tid_news_comments_label_write"
+msgstr "Оставить комментарий"
+
+#: .\templates\pages\news\detail.html:68
+msgid "tid_buttons_send"
+msgstr "Отправить"
+
+#: .\templates\pages\news\index.html:20
+msgid "tid_messages_news_list_noone"
+msgstr "Пока нет новостей"
+
+#: .\templates\pages\news\my.html:19
+msgid "tid_mynews_labels_nopublished"
+msgstr "Пока не опубликовано, можно редактировать"
+
+#: .\templates\pages\news\my.html:22
+msgid "tid_mynews_labels_published"
+msgstr "Новость опубликована, редактировать невозможно"
+
+#: .\templates\pages\news\my.html:48
+msgid "tid_mynews_label_not_published"
+msgstr "Не опубликовано"
+
+#: .\templates\pages\news\my.html:67
+msgid "tid_messages_mynews_noone"
+msgstr "У Вас пока нет новостей"
+
+#: .\templates\pages\news\news_item.html:7
+#: .\templates\utls_template\avatar.html:8
+#: .\templates\utls_template\avatar.html:22
+msgid "tid_avatar_alt_image"
+msgstr "аватарка"
+
+#: .\templates\pages\news\news_item.html:9
+#: .\templates\utls_template\avatar.html:11
+#: .\templates\utls_template\avatar.html:15
+#: .\templates\utls_template\avatar.html:24
+#: .\templates\utls_template\avatar.html:27
+msgid "tid_avatar_alt_no_image"
+msgstr "без аватарки"
+
+#: .\templates\pages\news\news_item.html:20
+msgid "tid_news_item_label_comment"
+msgstr "Комментарии"
+
+#: .\templates\pages\news\news_item.html:35
+msgid "tid_links_news_item"
+msgstr "Читать"
+
+#: .\templates\pages\news\tagsearch.html:19
+msgid "tid_buttons_tag_search"
+msgstr "Искать"
+
+#: .\templates\pages\news\tagsearch.html:29
+msgid "tid_messages_tag_search_empty"
+msgstr "К сожалению, по Вашему запросу новостей не найдено"

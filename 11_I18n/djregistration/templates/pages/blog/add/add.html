@@ -1,0 +1,39 @@
+{% extends 'base_template/base_template.html' %}
+{% load i18n %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+        {% if msg %}
+            {% include 'utls_template/alert.html' with bt_theme=msg_theme bt_text=msg %}
+        {% endif %}
+        {% url 'page_blog_add'   as action_blog_add %}
+        <form action="{{ action_blog_add }}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="form-group mb-4">
+                <h4 class="display-6">{% trans "tid_label_header" %}:</h4>
+                {{ form.header.errors }}
+                {{ form.header }}
+            </div>
+
+            <div class="form-group mb-4">
+                <h4 class="display-6">{% trans "tid_label_content" %}:</h4>
+                {{ form.content.errors }}
+                {{ form.content }}
+            </div>
+
+            <div class="form-group mb-4">
+                <h4 class="display-6">{% trans "tid_label_images" %}:</h4>
+                {{ form.images.errors }}
+                {{ form.images }}
+            </div>
+
+            <div class="form-group mb-4">
+                <input class="btn btn-lg btn-primary col" type="submit" name="sub" value="{% trans "tid_buttons_blog_add" %}">
+            </div>
+
+        </form>
+    {% else %}
+        {% trans "tid_messages_blog_add_auth" as message_blog_auth %}
+        {% include 'utls_template/alert.html' with bt_theme="warning" bt_text=message_blog_auth %}
+    {% endif %}
+{% endblock %}

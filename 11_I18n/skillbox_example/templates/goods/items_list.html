@@ -1,0 +1,24 @@
+<html>
+<h1>Список товаров</h1>
+
+{% if items_list %}
+    <table border="1">
+        <tbody>
+        <tr>
+            <td>Артикул</td>
+            <td>Цена</td>
+        </tr>
+        {% for item in items_list %}
+            <tr>
+                <td>{{ item.code }}</td>
+                <td>{{ item.price }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+
+{% else %}
+    <p>Товаров нет.</p>
+{% endif %}
+</html>

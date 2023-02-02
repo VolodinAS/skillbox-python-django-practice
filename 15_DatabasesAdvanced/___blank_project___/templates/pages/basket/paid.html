@@ -1,0 +1,21 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+        {% include 'general/goods_order.html' with cart=order.order_item.all total_paid=order.total_paid %}
+        {% if balance >= order.total_paid %}
+            {% url 'page_paid_success'   as action_paid_success %}
+            <form action="{{ action_paid_success }}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="order_id" value="{{ order.id }}">
+                <div class="form-group mb-4">
+                    <input class="btn btn-lg btn-primary col" type="submit" name="sub" value="Оплатить заказ">
+                </div>
+            </form>
+        {% else %}
+            {% include 'utls_template/alert.html' with bt_theme="warning" bt_text="У Вас не хватает средств для оплаты. <a href='/replenish'><b>Пополнить</b></a>"|safe %}
+        {% endif %}
+    {% else %}
+        {% include 'utls_template/alert.html' with bt_theme="warning" bt_text="Чтобы продолжить покупки, нужно авторизоваться" %}
+    {% endif %}
+
+{% endblock %}

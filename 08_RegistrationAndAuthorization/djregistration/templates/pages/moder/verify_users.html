@@ -1,0 +1,38 @@
+{% extends 'base_template/base_template.html' %}
+{% load poll_extras %}
+{% block content %}
+    {% url 'user_verify'   as action_verify %}
+    {% if request.user.is_authenticated %}
+        {% if request.user|has_group:"Модераторы" %}
+            {% if unverified_users %}
+                {% for user in unverified_users %}
+                    <div class="row mb-3 mt-3">
+                        <div class="col">
+                            <h4 class="display-6">{{ user.username }}</h4>
+                        </div>
+                        <div class="col">{{ user.groups.all.0 }}</div>
+                        <div class="col-auto">
+                            <form action="{{ action_verify }}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="user_id" value="{{ user.id }}">
+                                {% if user|has_group:"Зарегистрированные пользователи" %}
+                                    <input class="btn btn-primary" type="submit" name="sub" value="Верифицировать">
+                                {% elif user|has_group:"Верифицированные пользователи" %}
+                                    <input class="btn btn-danger" type="submit" name="sub" value="Снять верификацию">
+                                {% endif %}
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% include 'utls_template/alert.html' with bt_theme="info" bt_text="Нет неверифицированных пользователей" %}
+            {% endif %}
+        {% else %}
+            {% include 'utls_template/alert.html' with bt_theme="danger" bt_text="У вас нет прав" %}
+        {% endif %}
+    {% else %}
+        {% include 'utls_template/alert.html' with bt_theme="danger" bt_text="Нужна авторизация" %}
+    {% endif %}
+
+
+{% endblock %}

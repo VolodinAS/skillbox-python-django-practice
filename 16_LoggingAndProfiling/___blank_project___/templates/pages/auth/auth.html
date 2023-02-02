@@ -1,0 +1,14 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+    {% if not request.user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            {{ form.as_p }}
+            <input class="btn btn-lg btn-primary" type="submit" name="sub" value="Авторизация">
+        </form>
+    {% else %}
+        {% include 'utls_template/alert.html' with bt_theme="warning" bt_text="Вы уже авторизованы" %}
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+    {% include 'utls_template/alert.html' with bt_theme="danger" bt_text="Не знаю, как сделать переносы строк (заменить n на br)" %}
+    {% if news_item %}
+
+        <div class="row">
+            <div class="col">
+                <h3 class="display-5">{{ news_item.header }}</h3>
+            </div>
+            <div class="col-1 mt-2">
+                {% url 'news_edit' news_item.id as link_news_edit %}
+                <button onclick="window.location.href='{{ link_news_edit }}'"
+                        class="btn btn-primary" {% include 'utls_template/tooltip.html' with bt_tooltip="Редактировать новость" %} >
+                    <i class="bi bi-pencil-fill"></i>
+                </button>
+            </div>
+        </div>
+        <hr>
+        {{ news_item.content }}
+        <hr>
+        {% if news_item.comments.all|length %}
+            {% for comment in news_item.comments.all %}
+                <div class="row border border-success">
+                    <div class="col-2">
+                        {% if comment.name %}
+                            {% include 'utls_template/alert.html' with bt_theme='info' bt_text=comment.name %}
+                            <b>Аноним</b><br>
+                        {% else %}
+                            {% if comment.user %}
+                                {% include 'utls_template/alert.html' with bt_theme='primary' bt_text=comment.user %}
+                            {% else %}
+                                {% include 'utls_template/alert.html' with bt_theme='secondary' bt_text="Аноним" %}
+                            {% endif %}
+                        {% endif %}
+                        <span class="text-muted small">{{ comment.create_at|date:"d.m.Y H:i:s" }}</span>
+                    </div>
+                    <div class="col">
+                        {{ comment.text|safe }}
+                    </div>
+                </div>
+            {% endfor %}
+            <hr>
+        {% else %}
+            {% include 'utls_template/alert.html' with bt_theme="warning" bt_text="Пока еще никто не оставил комментарий! Будьте первым!" %}
+        {% endif %}
+        {% include 'news_comment/add_comment.html' %}
+    {% else %}
+        {% include 'utls_template/alert.html' with bt_theme="warning" bt_text="Такой новости не существует!" %}
+    {% endif %}
+{% endblock %}

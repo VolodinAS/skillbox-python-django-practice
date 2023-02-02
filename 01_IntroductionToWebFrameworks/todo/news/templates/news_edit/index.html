@@ -1,0 +1,29 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+    {% include 'utls_template/alert.html' with bt_theme="danger" bt_text="К сожалению, у меня не получилось добавить виджеты класса к полям, которые относятся к модели формы EditForm..." %}
+    {% url 'news_edit' news_item.id  as action_news_edit %}
+    <form action="{{ action_news_edit }}" method="post">
+        {% csrf_token %}
+        {{ news_edit_form.non_field_errors }}
+        <div class="form-group">
+            <label class="font-weight-bold" for="{{ news_edit_form.header.id_for_label }}">Заголовок новости:</label>
+            {{ news_edit_form.header }}
+        </div>
+
+        <div class="form-group">
+            <label class="font-weight-bold" for="{{ news_edit_form.content.id_for_label }}">Содержимое новости:</label>
+            {{ news_edit_form.content }}
+        </div>
+
+        <div class="form-check">
+            {{ news_edit_form.activity }}
+            <label class="form-check-label" for="{{ news_edit_form.activity.id_for_label }}">
+                Флаг активности
+            </label>
+        </div>
+
+        <hr>
+        <button class="btn btn-primary col" type="submit">Сохранить новость</button>
+    </form>
+
+{% endblock %}

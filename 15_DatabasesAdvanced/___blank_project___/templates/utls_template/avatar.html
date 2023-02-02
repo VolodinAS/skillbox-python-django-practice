@@ -1,0 +1,29 @@
+{% load static %}
+{% if item_element %}
+    {% url 'view_profile' item_element.user.id  as item_link_view_profile %}
+    <a href="{{ item_link_view_profile }}" target="_blank">
+        {% if item_element.user.profile %}
+            {% if item_element.user.profile.avatar_file %}
+                <img class="user-avatar" src="{% get_media_prefix %}{{ item_element.user.profile.avatar_file }}" width="100" alt="avatar of {{ item_element.user.username }}"><br>
+                <b>{{ item_element.user.username }}</b>
+            {% else %}
+                <img src="{% static 'images/system/no_avatar.png' %}" width="100" alt="no avatar"><br>
+                <b>{{ item_element.user.username }}</b>
+            {% endif %}
+        {% else %}
+            <img src="{% static 'images/system/no_avatar.png' %}" width="100" alt="no avatar">
+        {% endif %}
+    </a>
+{% else %}
+    {% if user_data %}
+        {% if user_data.profile %}
+            {% if user_data.profile.avatar_file %}
+                <img class="user-avatar" src="{% get_media_prefix %}{{ user_data.profile.avatar_file }}" width="250" alt="avatar of {{ user_data.username }}"><br>
+            {% else %}
+                <img src="{% static 'images/system/no_avatar.png' %}" width="100" alt="no avatar">
+            {% endif %}
+        {% else %}
+            <img src="{% static 'images/system/no_avatar.png' %}" width="100" alt="no avatar">
+        {% endif %}
+    {% endif %}
+{% endif %}

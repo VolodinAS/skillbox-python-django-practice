@@ -1,0 +1,65 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+
+    <nav>
+        <div class="nav nav-tabs" id="orders-tab" role="tablist">
+            <a class="nav-link active" id="orders-wait" data-toggle="tab" href="#orders-wait-href" role="tab" aria-controls="nav-home" aria-selected="true">Ожидают оплату</a>
+            <a class="nav-link" id="orders-paid" data-toggle="tab" href="#orders-paid-href" role="tab" aria-controls="nav-profile" aria-selected="false">Оплаченные</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="orders-content">
+        <div class="tab-pane fade show active" id="orders-wait-href" role="tabpanel" aria-labelledby="orders-wait-href">
+            {% if orders_np|length %}
+                {% for order in orders_np %}
+                    <div class="accordion" id="good_spoiler_{{ order.id }}">
+                        <div class="card">
+                            <div class="card-header" id="good_header_{{ order.id }}">
+                                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#good_target_{{ order.id }}" aria-expanded="false" aria-controls="good_target_{{ order.id }}">
+                                    <b>Заказ</b> от {{ order.create_at|date:"d.m.Y H:i:s" }} (Товаров: {{ order.order_item.count }}) на сумму <b>${{ order.total_paid|floatformat:2 }}</b>
+                                </button>
+                            </div>
+                            <div id="good_target_{{ order.id }}" class="collapse" aria-labelledby="good_header_{{ order.id }}" data-parent="#good_spoiler_{{ order.id }}">
+                                <div class="card-body">
+                                    {% include 'general/goods_order.html' with cart=order.order_item.all total_paid=order.total_paid %}
+                                    {% url 'page_paid' order.id  as link_paid %}
+                                    <button class="btn btn-lg btn-primary col" onclick="window.location.href='{{ link_paid }}'">Оплата заказа</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% include 'utls_template/alert.html' with bt_theme="success" bt_text="Нет заказов, ожидающих оплату" %}
+            {% endif %}
+        </div>
+        <div class="tab-pane fade" id="orders-paid-href" role="tabpanel" aria-labelledby="orders-paid-href">
+            {% if orders_p|length %}
+
+                {% for order in orders_p %}
+                    <div class="accordion" id="good_spoiler_{{ order.id }}">
+                        <div class="card">
+                            <div class="card-header" id="good_header_{{ order.id }}">
+                                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#good_target_{{ order.id }}" aria-expanded="false" aria-controls="good_target_{{ order.id }}">
+                                    <b>Заказ</b> от {{ order.create_at|date:"d.m.Y H:i:s" }}
+                                    (Товаров: {{ order.order_item.count }})
+                                    на сумму <b>${{ order.total_paid|floatformat:2 }}</b>,
+                                    оплачен {{ order.paid_at|date:"d.m.Y H:i:s" }}
+                                </button>
+                            </div>
+                            <div id="good_target_{{ order.id }}" class="collapse" aria-labelledby="good_header_{{ order.id }}" data-parent="#good_spoiler_{{ order.id }}">
+                                <div class="card-body">
+                                    {% include 'general/goods_order.html' with cart=order.order_item.all total_paid=order.total_paid %}
+                                    {% url 'page_paid' order.id  as link_paid %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            {% else %}
+                {% include 'utls_template/alert.html' with bt_theme="success" bt_text="Нет оплаченных заказов" %}
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

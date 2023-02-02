@@ -1,0 +1,35 @@
+{% extends 'base_template/base_template.html' %}
+{% load i18n %}
+{% block content %}
+    {% if current_hour < 16 or current_hour > 18 %}
+        {% if not request.user.is_authenticated %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+
+                <div class="form-group">
+                    <h4 class="display-6">{% trans "tid_form_labels_auth_login" %}:</h4>
+                    {{ form.username.errors }}
+                    {{ form.username }}
+                </div>
+
+                <div class="form-group">
+                    <h4 class="display-6">{% trans "tid_form_labels_auth_password" %}:</h4>
+                    {{ form.password.errors }}
+                    {{ form.password }}
+                </div>
+
+
+                <input class="btn btn-lg btn-primary col" type="submit" name="sub" value="{% trans "tid_buttons_form_auth" %}">
+            </form>
+        {% else %}
+            {% trans "tid_messages_form_auth_yet" as message_auth_yet %}
+            {% include 'utls_template/alert.html' with bt_theme="warning" bt_text=message_auth_yet %}
+        {% endif %}
+    {% else %}
+        {% trans "tid_messages_form_auth_time" as message_auth_time %}
+        {% include 'utls_template/alert.html' with bt_theme="warning" bt_text=message_auth_time %}
+    {% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base_template/base_template.html' %}
+{% load poll_extras %}
+{% block content %}
+    <form action="" method="get">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <label class="sr-only" for="id_tag">Тег для поиска:</label>
+        <div class="input-group">
+            {{ form.tag.errors }}
+            <div class="input-group-prepend">
+                <div class="input-group-text">Тег для поиска:</div>
+            </div>
+            {{ form.tag }}
+            <div class="input-group-prepend">
+                {{ form.dater }}
+            </div>
+            <div class="input-group-prepend">
+                <input class="btn btn-primary" type="submit" value="Поиск">
+            </div>
+        </div>
+    </form>
+    <hr>
+    {% if result|length %}
+        {% for news_item in result %}
+            {% include 'pages/news/news_item.html' %}
+        {% endfor %}
+    {% else %}
+        {% include 'utls_template/alert.html' with bt_theme="info" bt_text="К сожалению, по Вашему запросу новостей не найдено" %}
+    {% endif %}
+    <script>
+        $(document).ready(function(){
+            $("#id_dater").mask("99.99.9999");
+        })
+    </script>
+{% endblock %}

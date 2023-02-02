@@ -1,0 +1,72 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+
+    {% url 'page_index'   as action_index %}
+    <form action="{{ action_index }}" method="post">{% csrf_token %}
+        {{ form_data.non_field_errors }}
+        {% if category_list|length %}
+            <div class="form-group">
+                <label for="select_category">Выберите категорию (form.select_category):</label>
+                <select class="form-control" name="select_category" id="select_category">
+                    <option value="0">Выберите категорию из списка...</option>
+                    {% for category in category_list %}
+                        <option value="{{ category.id }}">{{ category.id }}. {{ category.title }}</option>
+                    {% endfor %}
+                </select>
+                {% if form_data.select_category|length %}
+                    <span class="badge badge-danger">Пока еще не знаю, как передать выбранный элемент (selected) в список select</span>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                К сожалению, список категорий пуст!
+            </div>
+        {% endif %}
+
+        {% if region_list|length %}
+            <div class="form-group">
+                <label for="select_region">Выберите регион (form.select_region):</label>
+                <select class="form-control" name="select_region" id="select_region">
+                    <option value="0">Выберите регион из списка...</option>
+                    {% for region in region_list %}
+                        <option value="{{ region.id }}">{{ region.title }}</option>
+                    {% endfor %}
+                </select>
+                {% if form_data.select_region|length %}
+                    <span class="badge badge-danger">Пока еще не знаю, как передать выбранный элемент (selected) в список select</span>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                К сожалению, список регионов пуст!
+            </div>
+        {% endif %}
+
+        <div class="form-group">
+            <label for="input_title">Введите искомое название объявления (form.input_title):</label>
+            <input type="text" name="input_title" id="input_title" class="form-control" placeholder="ботинки, bmw и т.д." value="{{ form_data.input_title }}">
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary col">Найти</button>
+        </div>
+    </form>
+
+    <div id="form-result">
+        {% if result|length %}
+            <div class="alert alert-warning" role="alert">
+                {{ result }}
+            </div>
+    {#        {{ form_data }}#}
+            <div class="dropdown-divider"></div>
+            <b>form_data.select_category:</b>
+            {{ form_data.select_category }}
+            <div class="dropdown-divider"></div>
+            <b>form_data.select_region:</b>
+            {{ form_data.select_region }}
+            <div class="dropdown-divider"></div>
+            <b>form_data.input_title:</b>
+            {{ form_data.input_title }}
+        {% endif %}
+    </div>
+{% endblock %}

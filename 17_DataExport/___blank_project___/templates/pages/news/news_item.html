@@ -1,0 +1,10 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+    <h1>{{ news_item.title }}</h1>
+    <hr>
+    <h6>
+        {{ news_item.content }}
+    </h6>
+    <hr>
+    <b>Опубликовано:</b> {{ news_item.published_at|date:"d.m.Y H:i:s" }} от {{ news_item.author.username }}
+{% endblock %}

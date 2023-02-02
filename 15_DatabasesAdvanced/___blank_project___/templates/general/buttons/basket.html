@@ -1,0 +1,8 @@
+{% with total_items=cart|length %}{% endwith %}
+{% url 'page_basket'   as link_page_basket %}
+<button class="btn btn-sm btn-primary" onclick="window.location.href='{{ link_page_basket }}'" {% include 'utls_template/tooltip.html' with bt_tooltip=cart_length_format|safe %}>
+    {% include 'general/buttons/svg/basket.html' %}
+    <span class="badge badge-light">
+        {{ cart|length }}
+    </span>
+</button>

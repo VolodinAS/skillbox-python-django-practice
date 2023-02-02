@@ -1,0 +1,208 @@
+{% extends 'base_template/base_template.html' %}
+{% load poll_extras %}
+{% load static %}
+{% load i18n %}
+{% load cache %}
+{% block content %}
+    {% if user_data %}
+        <div class="row">
+            <div class="col text-center">
+                {% include 'utls_template/avatar.html' with user_data=user_data %}
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-3">
+                <h5 class="display-6">{% trans "Пользователь" %}:</h5>
+            </div>
+            <div class="col">{{ user_data.username }}</div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-3">
+                <h5 class="display-6">{% trans "Полное имя" %}:</h5>
+            </div>
+            <div class="col">{{ user_data.first_name|capfirst }} {{ user_data.last_name|capfirst }}</div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-3">
+                <h5 class="display-6">{% trans "Дата рождения" %}:</h5>
+            </div>
+            <div class="col">{{ user_data.profile.birthday|date:"d.m.Y" }}</div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-3">
+                <h5 class="display-6">{% trans "Город проживания" %}:</h5>
+            </div>
+            <div class="col">{{ user_data.profile.city }}</div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-3">
+                <h5 class="display-6">{% trans "Телефон" %}:</h5>
+            </div>
+            <div class="col">{{ user_data.profile.phone }}</div>
+        </div>
+    {% else %}
+        {% if request.user.is_authenticated %}
+{#            {% if request.user.groups.all|length %}#}
+{#                {% if request.user|has_group:"Верифицированные пользователи" %}#}
+{#                    <div class="alert alert-success" role="alert">#}
+{#                        <b>Группа:</b> Верифицированные пользователи#}
+{#                    </div>#}
+{#                    {% if request.user|has_group:"Модераторы" %}#}
+{#                        <div class="alert alert-primary" role="alert">#}
+{#                            <b>Группа:</b> Модераторы#}
+{#                        </div>#}
+{#                    {% endif %}#}
+{#                {% else %}#}
+{#                    {% include 'utls_template/alert.html' with bt_theme="warning" bt_text="Вам аккаунт еще не верифицирован! Дождитесь решения модератора!" %}#}
+{#                {% endif %}#}
+{#            {% else %}#}
+{#                {% include 'utls_template/alert.html' with bt_theme="info" bt_text="Группа пользователя не определена" %}#}
+{#            {% endif %}#}
+
+            {% include 'utls_template/alert/0.html' with bt_theme='primary' %}
+            <strong>{% trans 'Баланс' %}</strong>: ${{ request.user.profile.balance|floatformat:2 }}
+            {% include 'utls_template/alert/1.html' %}
+
+            {% trans "Акции" as message_title_tab_promotions %}
+            {% trans "Предложения" as message_title_tab_offers %}
+            {% trans "История покупок" as message_title_tab_history %}
+
+            {% include 'utls_template/tab/0.html' with tab_name="profile" %}
+            {% include 'utls_template/tab/1.html' with tab_name="profile" tab_active="active" tab_link="promotion" tab_selected="true" tab_title=message_title_tab_promotions %}
+            {% include 'utls_template/tab/1.html' with tab_name="profile" tab_link="offers" tab_title=message_title_tab_offers %}
+            {% include 'utls_template/tab/1.html' with tab_name="profile" tab_link="history" tab_title=message_title_tab_history %}
+            {% include 'utls_template/tab/2.html' with tab_name="profile" %}
+            {% include 'utls_template/tab/3.html' with tab_name="profile" tab_show="show active" tab_link="promotion" %}
+
+            {% if promotions_list %}
+                {% for promotion in promotions_list %}
+                    {{ promotion }}
+                    <hr>
+                {% endfor %}
+            {% else %}
+                {% trans "Нет доступных акций" as message_general_promotions_empty %}
+                {% include 'utls_template/alert.html' with bt_theme="info" bt_text=message_general_promotions_empty %}
+            {% endif %}
+
+            {% include 'utls_template/tab/4.html' %}
+            {% include 'utls_template/tab/3.html' with tab_name="profile" tab_link="offers" %}
+
+            {% if offers_list %}
+                {% for offer in offers_list %}
+                    {{ offer }}
+                    <hr>
+                {% endfor %}
+            {% else %}
+                {% trans "Нет доступных предложений" as message_general_offers_empty %}
+                {% include 'utls_template/alert.html' with bt_theme="info" bt_text=message_general_offers_empty %}
+            {% endif %}
+
+            {% include 'utls_template/tab/4.html' %}
+            {% include 'utls_template/tab/3.html' with tab_name="profile" tab_link="history" %}
+
+            {% if orders_list %}
+                {% cache 500 order_list_cache %}
+                    {% for order in orders_list %}
+                        <b>{% trans "Количество товара" %}:</b> {{ order.goods_amount }}<br>
+                        <b>{% trans "Сумма покупки" %}:</b> ${{ order.total_money }}<br>
+                        <b>{% trans "Дата покупки" %}:</b> ${{ order.paid_at|date:"d.m.Y H:i:s" }}<br>
+                        <hr>
+                    {% endfor %}
+                {% endcache %}
+            {% else %}
+                {% trans "У Вас еще нет покупок" as message_general_orders_empty %}
+                {% include 'utls_template/alert.html' with bt_theme="info" bt_text=message_general_orders_empty %}
+            {% endif %}
+
+            {% include 'utls_template/tab/4.html' %}
+            {% include 'utls_template/tab/4.html' %}
+
+            <div class="m-4"></div>
+            {% include 'utls_template/accordion/1.html' with accordion_name='profile' accordion_id='1' %}
+            <b>{% trans 'Редактировать профиль' %}</b>
+            {% include 'utls_template/accordion/2.html' with accordion_name='profile' accordion_id='1' %}
+
+            {% if msg %}
+                {% include 'utls_template/alert.html' with bt_theme=msg_theme bt_text=msg %}
+            {% endif %}
+
+            {% url 'user_profile'   as action_save_profile %}
+            <form action="{{ action_save_profile }}" method="post" enctype="multipart/form-data">
+                {{ form.non_field_errors }}
+                {% csrf_token %}
+                <div class="form-group mb-4">
+                    <h4 class="display-6">{% trans "Ваше имя" %}:</h4>
+                    {{ form.first_name.errors }}
+                    {{ form.first_name }}
+                </div>
+
+                <div class="form-group mb-4">
+                    <h4 class="display-6">{% trans "Ваша фамилия" %}:</h4>
+                    {{ form.last_name.errors }}
+                    {{ form.last_name }}
+                </div>
+
+                <div class="form-group mb-4">
+                    <h4 class="display-6">{% trans "Дата рождения" %}:</h4>
+                    {{ form.birthday.errors }}
+                    {{ form.birthday }}
+                </div>
+
+                <div class="form-group mb-4">
+                    <h4 class="display-6">{% trans "Город проживания" %}:</h4>
+                    {{ form.city.errors }}
+                    {{ form.city }}
+                </div>
+
+                <div class="form-group mb-4">
+                    <h4 class="display-6">{% trans "Телефон" %}:</h4>
+                    {{ form.phone.errors }}
+                    {{ form.phone }}
+                </div>
+
+                <div class="form-group mb-4">
+                    <div class="row">
+                        <div class="col-auto text-center">
+                            {% if request.user.profile %}
+                                {% if request.user.profile.avatar_file %}
+                                    <img class="user-avatar" src="{% get_media_prefix %}{{ request.user.profile.avatar_file }}" width="100" alt="avatar of {{ request.user.username }}">
+                                {% else %}
+                                    <img src="{% static 'images/system/no_avatar.png' %}" width="100" alt="no avatar">
+                                {% endif %}
+                            {% else %}
+                                <img src="{% static 'images/system/no_avatar.png' %}" width="100" alt="no avatar">
+                            {% endif %}
+                        </div>
+                        <div class="col">
+                            <h4 class="display-6">{% trans "Аватар" %}:</h4>
+                            {{ form.avatar_file.errors }}
+                            <div class="custom-file">
+                                {{ form.avatar_file }}
+                                <label class="custom-file-label" for="id_avatar_file">{% trans "Выбрать файл" %}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group mb-4">
+                    <input class="btn btn-lg btn-primary col" type="submit" name="sub" value="{% trans 'Обновить данные' %}">
+                </div>
+
+            </form>
+
+            {% include 'utls_template/accordion/3.html' %}
+
+        {% else %}
+            {% trans "У Вас нет доступа к данному разделу!" as message_system_denied %}
+            {% include 'utls_template/alert.html' with bt_theme="warning" bt_text=message_system_denied %}
+        {% endif %}
+    {% endif %}
+
+
+{% endblock %}

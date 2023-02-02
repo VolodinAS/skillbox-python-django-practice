@@ -1,0 +1,69 @@
+{% extends 'base_template/base_template.html' %}
+{% load i18n %}
+{% load poll_extras %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+        {% if request.user|has_group:"Модераторы" %}
+            {% if msg %}
+                {% include 'utls_template/alert.html' with bt_theme="success" bt_text=msg %}
+            {% endif %}
+            {% if news_list_moder %}
+                {% url 'page_news_moder_publish'   as action_news_publish %}
+                {% for news_item in news_list_moder %}
+                    <div class="row mb-2">
+                        <div class="col-1">
+                            ID#{{ news_item.id }}
+                        </div>
+                        <div class="col">
+                            {% url 'page_my_news_detail_moder' news_item.id as link_news_detail_moder %}
+                            <a href="{{ link_news_detail_moder }}"><b>{{ news_item.header }}</b></a>
+                        </div>
+                        <div class="col text-center">
+                            <b>{% trans "tid_blog_label_created_at" %}:</b><br>
+                            {{ news_item.create_at|date:"d.m.Y H:i:s" }}
+                        </div>
+                        <div class="col text-center">
+                            <b>{% trans "tid_blog_label_updated_at" %}:</b><br>
+                            {{ news_item.updated_at|date:"d.m.Y H:i:s" }}
+                        </div>
+                        <div class="col text-center">
+                            <b>{% trans "tid_news_label_published_at" %}:</b><br>
+                            {% if not news_item.published %}
+                                {% trans "tid_news_label_not_published" %}
+                            {% else %}
+                                {{ news_item.updated_at|date:"d.m.Y H:i:s" }}
+                            {% endif %}
+
+                        </div>
+                        <div class="col-2">
+                            {% if news_item.published %}
+                                {% trans "tid_news_label_not_published" %}
+                            {% else %}
+                                <form action="{{ action_news_publish }}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="news_id" value="{{ news_item.id }}">
+                                    <input class="btn btn-primary" type="submit" name="sub" value="{% trans "tid_buttons_moder_news_publish" %}">
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row mt-0">
+                        <div class="col">
+                            {{ news_item.content }}
+                        </div>
+                    </div>
+                    <div class="dropdown-divider mb-5"></div>
+                {% endfor %}
+            {% else %}
+                {% trans "tid_messages_moder_news_noone" as message_moder_news_noone %}
+                {% include 'utls_template/alert.html' with bt_theme="info" bt_text=message_moder_news_noone %}
+            {% endif %}
+        {% else %}
+            {% trans "tid_messages_system_denied" as message_system_denied %}
+            {% include 'utls_template/alert.html' with bt_theme="danger" bt_text=message_system_denied %}
+        {% endif %}
+    {% else %}
+        {% trans "tid_messages_system_need_auth" as message_system_need_auth %}
+        {% include 'utls_template/alert.html' with bt_theme="danger" bt_text=message_system_need_auth %}
+    {% endif %}
+{% endblock %}

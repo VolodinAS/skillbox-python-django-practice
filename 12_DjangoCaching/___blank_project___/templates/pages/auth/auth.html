@@ -1,0 +1,29 @@
+{% extends 'base_template/base_template.html' %}
+{% load i18n %}
+{% block content %}
+    {% if not request.user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <div class="form-group">
+                <h4 class="display-6">{% trans "Логин" %}:</h4>
+                {{ form.username.errors }}
+                {{ form.username }}
+            </div>
+
+            <div class="form-group">
+                <h4 class="display-6">{% trans "Пароль" %}:</h4>
+                {{ form.password.errors }}
+                {{ form.password }}
+            </div>
+
+
+            <input class="btn btn-lg btn-primary" type="submit" name="sub" value="{% trans "Войти" %}">
+        </form>
+    {% else %}
+        {% trans "Вы уже авторизованы" as message_system_auth_yet %}
+        {% include 'utls_template/alert.html' with bt_theme="warning" bt_text=message_system_auth_yet %}
+    {% endif %}
+
+{% endblock %}

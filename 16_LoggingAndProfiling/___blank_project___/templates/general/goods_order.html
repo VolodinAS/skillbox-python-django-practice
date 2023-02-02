@@ -1,0 +1,49 @@
+{% load static %}
+<table class="table">
+    <thead>
+    <tr>
+        <th class="text-center">Изображение</th>
+        <th class="text-center">Название</th>
+        <th class="text-center">Цена за шт.</th>
+        <th class="text-center">Количество</th>
+        <th class="text-center">Общая цена</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in cart %}
+        {% with product=item.good %}
+            <tr>
+                {% url 'page_market_item' product.id  as link_good_item %}
+                <td class="text-center">
+                    <a href="{{ link_good_item }}">
+                        {% if product.face_image %}
+                            <img src="{% get_media_prefix %}{{ product.face_image }}" width="100">
+                        {% else %}
+
+                        {% endif %}
+                    </a>
+                </td>
+
+                <td>
+                    <a href="{{ link_good_item }}">
+                        {{ product.title }}
+                    </a>
+                </td>
+
+                <td class="text-center">${{ item.price }}</td>
+
+                <td class="text-center">{{ item.amount }}</td>
+
+                <td class="text-center">${{ item.get_total_price|floatformat:2 }}</td>
+
+
+            </tr>
+        {% endwith %}
+    {% endfor %}
+    <tr class="total">
+        <td colspan="4" class="text-right"><b>Всего:</b></td>
+        <td class="text-center">${{ total_paid|floatformat:2 }}</td>
+    </tr>
+    </tbody>
+</table>

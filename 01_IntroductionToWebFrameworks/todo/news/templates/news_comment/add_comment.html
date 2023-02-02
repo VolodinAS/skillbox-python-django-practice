@@ -1,0 +1,21 @@
+{% url 'news_details' news_item.id  as action_comment %}
+{{ add_comment_form.errors }}
+<form action="{{ action_comment }}" method="post">
+    {% csrf_token %}
+    {{ add_comment_form.non_field_errors }}
+    <input type="hidden" value="{{ news_item.id }}" name="news_id">
+    {% if request.user.is_authenticated %}
+        {{ request.user.username }} | <label class="font-weight-bold" for="{{ add_comment_form.text.id_for_label }}">Текст комментария:</label>
+    {% else %}
+        <div class="form-group">
+            <label class="font-weight-bold" for="{{ add_comment_form.name.id_for_label }}">Ваше имя:</label>
+            {{ add_comment_form.name }}
+            <label class="font-weight-bold" for="{{ add_comment_form.text.id_for_label }}">Текст комментария:</label>
+        </div>
+    {% endif %}
+    <div class="form-group">
+
+        {{ add_comment_form.text }}
+    </div>
+    <button class="btn btn-primary col" type="submit">Отправить</button>
+</form>

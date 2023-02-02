@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col p-1 text-center">
+        {% url 'page_blog_add'   as link_blog_add %}
+        <button class="btn btn-sm btn-primary col-11" onclick="window.location.href='{{ link_blog_add }}'">Добавить блог</button>
+    </div>
+    <div class="col p-1 text-center">
+        {% url 'page_blog_import'   as link_blog_import %}
+        <button class="btn btn-sm btn-primary col-11" onclick="window.location.href='{{ link_blog_import }}'">Импорт блога</button>
+    </div>
+</div>
+<div class="dropdown-divider"></div>

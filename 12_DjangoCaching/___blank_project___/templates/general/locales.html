@@ -1,0 +1,42 @@
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{#{{ LANGUAGE_CODE }}#}
+<style>
+    .image-post-button{
+        width: 40px;
+        height: 32px;
+        border-radius: 5px;
+        {#border: solid 1px #000;#}
+        box-shadow: -3px -3px lightgray;
+    }
+    .locale-form
+    {
+        position: absolute;
+        right: 18px;
+        top: 18px;
+    }
+</style>
+<div class="locale-form">
+    <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ redirect_to }}">
+        {% if LANGUAGE_CODE == "ru" %}
+            <input type="hidden" name="language" value="en">
+            <input
+                    class="image-post-button"
+                    type="image"
+                    src="{% static 'images/system/locales/usa-ico.svg' %}"
+                    title="{% trans "Переключить на Английский" %}"
+                    alt="{% trans "Переключить на Английский" %}" />
+        {% else %}
+            <input type="hidden" name="language" value="ru">
+            <input
+                    class="image-post-button"
+                    type="image"
+                    src="{% static 'images/system/locales/russia.svg' %}"
+                    title="{% trans "Переключить на Русский" %}"
+                    alt="{% trans "Переключить на Русский" %}" />
+        {% endif %}
+    </form>
+</div>

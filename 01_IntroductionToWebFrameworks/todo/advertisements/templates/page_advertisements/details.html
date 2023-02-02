@@ -1,0 +1,76 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+    {% if advertisement %}
+        <p class="display-4">
+            {{ advertisement.title }}
+        </p>
+        <hr>
+
+        <div class="row m-4">
+            <div class="col-3 font-weight-bold">Тип:</div>
+            <div class="col">{{ advertisement.typer.title }}</div>
+        </div>
+
+        <div class="row m-4">
+            <div class="col-3 font-weight-bold">Категория:</div>
+            <div class="col">{{ advertisement.category.title }}</div>
+        </div>
+
+        <div class="row m-4">
+            <div class="col-3 font-weight-bold">Цена:</div>
+            <div class="col">{{ advertisement.price_value }} {{ advertisement.price_currency.sign }}</div>
+        </div>
+
+        <div class="row m-4">
+            <div class="col-3 font-weight-bold">Регион:</div>
+            <div class="col">{{ advertisement.region.title }}</div>
+        </div>
+
+        <div class="row m-4">
+            <div class="col-3 font-weight-bold">Описание:</div>
+            <div class="col">{{ advertisement.description }}</div>
+        </div>
+        <hr>
+        <h3>Контакты</h3>
+        <hr>
+
+        <div class="row m-4">
+            <div class="col-3 font-weight-bold">Имя:</div>
+            <div class="col">{{ advertisement.user.name }}</div>
+        </div>
+
+        <div class="row m-4">
+            <div class="col-3 font-weight-bold">Почта:</div>
+            <div class="col"><a href="mailto:{{ advertisement.user.email }}" target="_blank">{{ advertisement.user.email }}</a></div>
+        </div>
+
+        <div class="row m-4">
+            <div class="col-3 font-weight-bold">Телефон:</div>
+            <div class="col"><a href="tel:{{ advertisement.user.phone }}" target="_blank">{{ advertisement.user.phone }}</a></div>
+        </div>
+        <hr>
+        <h3>Другая информация</h3>
+        <hr>
+
+        <div class="row m-4">
+            <div class="col-3 font-weight-bold">Дата создания:</div>
+            <div class="col">{{ advertisement.create_at|date:"d.m.Y H:i:s" }}</div>
+        </div>
+
+        <div class="row m-4">
+            <div class="col-3 font-weight-bold">Дата публикации:</div>
+            <div class="col">{{ advertisement.publicised_at|date:"d.m.Y H:i:s" }}</div>
+        </div>
+
+        <div class="row m-4">
+            <div class="col-3 font-weight-bold">Дата последнего изменения:</div>
+            <div class="col">{{ advertisement.updated_at|date:"d.m.Y H:i:s" }}</div>
+        </div>
+
+
+    {% else %}
+        <div class="alert alert-warning" role="alert">
+            Такого объявления не существует
+        </div>
+    {% endif %}
+{% endblock %}

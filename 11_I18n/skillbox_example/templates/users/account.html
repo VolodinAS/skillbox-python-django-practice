@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль</title>
+</head>
+<body>
+
+{% if request.user.is_authenticated %}
+    Добро пожаловать на сайт, {{ request.user.username }}
+    {% if request.user.avatar %}
+        <p>
+        <img src="{{ request.user.avatar.url }}" alt="Smiley face" width="250" height="250">
+        </p>
+    {% else %}
+        <p>Аватар не загружен</p>
+    {% endif %}
+{% else %}
+    Вы неавторизованы на нашем сайте.
+    <a href="{% url 'login' %}">Войти</a>
+{% endif %}
+
+</body>
+</html>

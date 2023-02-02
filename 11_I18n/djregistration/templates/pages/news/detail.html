@@ -1,0 +1,75 @@
+{% extends 'base_template/base_template.html' %}
+{% load i18n %}
+{% load poll_extras %}
+{% block content %}
+    <div class="row mb-3">
+        <div class="col">
+            <h4 class="display-4">
+                {{ news_item.header }}
+            </h4>
+            {% if news_item.tag %}
+                {% url 'page_tag_search' as link_tag_search %}
+                <a href="{{ link_tag_search }}?tag={{ news_item.tag }}">#{{ news_item.tag }}</a>
+            {% endif %}
+        </div>
+        <div class="col-1 text-center">
+            <span class="text-muted">
+                <b>{% trans "tid_label_author" %}:</b><br>
+                {% url 'view_profile' news_item.user.id  as link_view_profile %}
+                <a href="{{ link_view_profile }}" target="_blank">{{ news_item.user.username }}</a>
+            </span>
+        </div>
+        <div class="col-2 text-center">
+            <span class="text-muted">
+                <b>{% trans "tid_news_label_published_at" %}:</b><br>
+                {{ news_item.publicised_at|date:"d.m.Y H:i:s" }}
+            </span>
+        </div>
+    </div>
+    <hr>
+    {{ news_item.content }}
+    <hr>
+    {% if news_item.comment_news_item.all|length %}
+        {% for news_comment in news_item.comment_news_item.all %}
+            <div class="row">
+                <div class="col-2 text-center">
+                    
+                    {% include 'utls_template/avatar.html' with item_element=news_comment %}
+                    
+                    <div class="text-muted small">
+                        {{ news_comment.create_at|date:"d.m.Y H:i:s" }}
+                    </div>
+                </div>
+                <div class="col">
+                    {{ news_comment.text }}
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+    {% else %}
+        {% trans "tid_messages_news_comments_noone" as message_news_comments_noone %}
+        {% include 'utls_template/alert.html' with bt_theme="info" bt_text=message_news_comments_noone %}
+    {% endif %}
+    {% if request.user.is_authenticated %}
+        <hr>
+        {% if msg %}
+            {% include 'utls_template/alert.html' with bt_theme=msg_theme bt_text=msg %}
+        {% endif %}
+        {% url 'page_news_item' news_item.id as action_news_item_comment %}
+        <form action="{{ action_news_item_comment }}" method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="form-group">
+                <h4 class="display-6">{% trans "tid_news_comments_label_write" %}:</h4>
+                {{ form.text.errors }}
+                {{ form.text }}
+            </div>
+            <div class="form-group">
+                <input class="btn btn-primary btn-lg col" type="submit" name="sub" value="{% trans "tid_buttons_send" %}">
+            </div>
+        </form>
+    {% else %}
+        {% trans "tid_messages_news_comment_denied" as message_news_comment_denied %}
+        {% include 'utls_template/alert.html' with bt_theme="warning" bt_text=message_news_comment_denied %}
+    {% endif %}
+{% endblock %}

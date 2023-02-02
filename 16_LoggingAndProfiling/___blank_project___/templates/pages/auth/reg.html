@@ -1,0 +1,89 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+    {% if not request.user.is_authenticated %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="form-group">
+                <h4 class="display-6">Логин (для входа):</h4>
+                {{ form.username.errors }}
+                {{ form.username }}
+            </div>
+
+            <div class="form-group">
+                <h4 class="display-6">Пароль (<a href="javascript:generateRandomPassword()">сгенерировать пароль</a>)<span
+                        id="randompassword"></span>:</h4>
+                {{ form.password1.errors }}
+                {{ form.password1 }}
+            </div>
+
+            <div class="form-group">
+                <h4 class="display-6">Повторите пароль:</h4>
+                {{ form.password2.errors }}
+                {{ form.password2 }}
+            </div>
+
+            <div class="form-group">
+                <h4 class="display-6">Ваше имя:</h4>
+                {{ form.first_name.errors }}
+                {{ form.first_name }}
+            </div>
+
+            <div class="form-group">
+                <h4 class="display-6">Ваша фамилия:</h4>
+                {{ form.last_name.errors }}
+                {{ form.last_name }}
+            </div>
+
+            <div class="form-group">
+                <h4 class="display-6">Дата рождения:</h4>
+                {{ form.birthday.errors }}
+                {{ form.birthday }}
+            </div>
+
+            <div class="form-group">
+                <h4 class="display-6">Город проживания:</h4>
+                {{ form.city.errors }}
+                {{ form.city }}
+            </div>
+
+            <div class="form-group">
+                <h4 class="display-6">Телефон:</h4>
+                {{ form.phone.errors }}
+                {{ form.phone }}
+            </div>
+
+            <div class="form-group">
+                <h4 class="display-6">Капча. Решите пример: {{ num1 }} + {{ num2 }} = ?</h4>
+                {{ form.captcha.errors }}
+                {{ form.captcha }}
+            </div>
+
+            <input class="btn btn-lg btn-primary col" type="submit" name="sub" value="Регистрация">
+        </form>
+
+        <script>
+
+
+        function generateRandomPassword()
+        {
+            let randomstring = generatePassword(12);
+            console.log(randomstring)
+            $("#id_password1").val(randomstring)
+            $("#id_password2").val(randomstring)
+            $("#randompassword").html(' -> ' + randomstring)
+        }
+
+        const generatePassword = (
+            length = 20,
+            wishlist = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@-#$'
+        ) => Array.from(crypto.getRandomValues(new Uint32Array(length)))
+                .map((x) => wishlist[x % wishlist.length])
+                .join('')
+
+    </script>
+    {% else %}
+        {% include 'utls_template/alert.html' with bt_theme="warning" bt_text="Вы уже зарегистрированы" %}
+    {% endif %}
+
+{% endblock %}

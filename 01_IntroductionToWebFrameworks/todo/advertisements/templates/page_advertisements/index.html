@@ -1,0 +1,55 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+    {% url 'page_advertisements'   as action_advertisements %}
+    <form action="{{ action_advertisements }}" method="post">{% csrf_token %}
+        <div class="form-group">
+            <label for="send-button">Отправка POST данных на {{ action_advertisements }}:</label>
+            <input id="send-button" class="btn btn-primary" type="submit" name="sub" value="Отправить">
+        </div>
+        <div id="form-result">
+            {% if result|length %}
+                <div class="alert alert-warning" role="alert">
+                    {{ result }}
+                </div>
+            {% endif %}
+        </div>
+    </form>
+
+    <p class="display-4">
+        Список объявлений ({{ advertisements|length }})
+    </p>
+    {% if advertisements %}
+        <div class="row text-center font-weight-bold">
+            <div class="col mb-2 col-2">Тип</div>
+            <div class="col">Заголовок</div>
+            <div class="col-1">Регион</div>
+            <div class="col-2">Категория</div>
+            <div class="col-2">Цена</div>
+            <div class="col">Просмотров</div>
+        </div>
+        {% for advertisement in advertisements %}
+            <div class="row mb-4">
+                <div class="col-2">
+                    {{ advertisement.typer.title }}
+                </div>
+                <div class="col">
+                    {% url 'page_advertisement_details' advertisement.id as link_advertisement_details %}
+                    <a href="{{ link_advertisement_details }}" target="_blank"><b>{{ advertisement.title }}</b></a>
+                </div>
+                <div class="col-1">
+                    {{ advertisement.region.title }}
+                </div>
+                <div class="col-2">
+                    {{ advertisement.category.title }}
+                </div>
+                <div class="col-2 text-center">
+                    {{ advertisement.price_value }} {{ advertisement.price_currency.sign }}
+                </div>
+                <div class="col text-center">
+                    {{ advertisement.views_count }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="dropdown-divider"></div>
+{% endblock %}

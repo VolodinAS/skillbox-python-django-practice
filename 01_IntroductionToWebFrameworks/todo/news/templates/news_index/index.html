@@ -1,0 +1,26 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+    <hr>
+    {% include 'auth_template/buttons/news_buttons.html' %}
+    {% if news_list %}
+        {% for news_item in news_list %}
+            <div class="row mt-3 mb-3">
+                <div class="col-1 mr-4">
+                    {{ news_item.user.name }}
+                </div>
+                <div class="col">
+                    {% url 'news_details' news_item.id as link_news_details %}
+                    <a href="{{ link_news_details }}">
+                        <h3>{{ news_item.header }}</h3>
+                    </a>
+                    <span class="text-muted small">
+                        <b>Опубликовано:</b> {{ news_item.publicised_at|date:"d.m.Y H:i:s" }}<br>
+                        <b>Комментариев:</b> {{ news_item.comments.all|length }}
+                    </span>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        {% include 'utls_template/alert.html' with bt_theme="alert" bt_text="Списка новостей пока нет" %}
+    {% endif %}
+{% endblock %}

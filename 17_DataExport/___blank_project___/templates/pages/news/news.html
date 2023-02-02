@@ -1,0 +1,12 @@
+{% extends 'base_template/base_template.html' %}
+{% block content %}
+    <ul>
+        {% for news_item in news_list %}
+            <li>
+                {% url 'news:page_houses_news_item' news_item.id  as link_news_item %}
+                <a href="{{ link_news_item }}">{{ news_item.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
